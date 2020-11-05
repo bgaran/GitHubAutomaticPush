@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.eclipse.jgit.*;
 import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.Git;
