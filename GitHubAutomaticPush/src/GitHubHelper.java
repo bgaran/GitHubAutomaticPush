@@ -27,16 +27,21 @@ public class GitHubHelper {
 	 * @param username - GitHub User Name (String)
 	 * @param password - GitHub Password (String)
 	 */
-	public void ConnectToGitHub(String username, String password,String filePath )
+	public String ConnectToGitHub(String username, String password,String filePath )
 	{
+		credentials=new UsernamePasswordCredentialsProvider(username,password);
 		Path repoPath = Paths.get(filePath);
+		String message="Successfully Connected to Github!";
 		try{
-			git=git.open(repoPath.toFile());
+			git=Git.open(repoPath.toFile());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			message="Failed to Connect to GitHub: "+e1.getMessage();
 		}
-		credentials=new UsernamePasswordCredentialsProvider(username,password);
+		return message;
+		
+		
 	}
 	
 	/**
