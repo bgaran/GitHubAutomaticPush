@@ -27,7 +27,7 @@ public class GitHubHelper {
 	 * @param username - GitHub User Name (String)
 	 * @param password - GitHub Password (String)
 	 */
-	public String ConnectToGitHub(String username, String password,String filePath )
+	public String ConnectToGitHub(String username, String password,String filePath)
 	{
 		credentials=new UsernamePasswordCredentialsProvider(username,password);
 		Path repoPath = Paths.get(filePath);
@@ -45,7 +45,7 @@ public class GitHubHelper {
 	}
 	
 	/**
-	 * This method saves the currenct progress and
+	 * This method saves the current progress and
 	 * pushes the current project to the connected GitHub repository
 	 */
 	public void githubPush()
