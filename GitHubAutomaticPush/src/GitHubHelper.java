@@ -1,37 +1,47 @@
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.eclipse.jgit.*;
+import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.AbortedByHookException;
+import org.eclipse.jgit.api.errors.ConcurrentRefUpdateException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.NoHeadException;
+import org.eclipse.jgit.api.errors.NoMessageException;
+import org.eclipse.jgit.api.errors.ServiceUnavailableException;
 import org.eclipse.jgit.api.errors.TransportException;
+import org.eclipse.jgit.api.errors.UnmergedPathsException;
+import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class GitHubHelper {
 
 	Git git;
+	UsernamePasswordCredentialsProvider credentials;
 	//Repository repo;
 	/**
 	 * This method connects to GitHub with the given user name and password
 	 * @param username - GitHub User Name (String)
 	 * @param password - GitHub Password (String)
 	 */
-	public void ConnectToGitHub(String username, String password)
+	public String ConnectToGitHub(String username, String password,String filePath )
 	{
-		try {
-			git.cloneRepository()
-			  .setURI("https://github.com/bgaran/SeniorDesignTemplateProject.git")
-			  //.setDirectory("/path/to/repo")
-			  .call();
-		} catch (InvalidRemoteException e) {
+		credentials=new UsernamePasswordCredentialsProvider(username,password);
+		Path repoPath = Paths.get(filePath);
+		String message="Successfully Connected to Github!";
+		try{
+			git=Git.open(repoPath.toFile());
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransportException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (GitAPIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
+			message="Failed to Connect to GitHub: "+e1.getMessage();
 		}
-		//repo=getRepository();
+		return message;
+		
+		
 	}
 	
 	/**
@@ -40,7 +50,35 @@ public class GitHubHelper {
 	 */
 	public void githubPush()
 	{
-		git.commit();
-		git.push();
+		CommitCommand commit=git.commit();
+		commit.setCredentialsProvider(credentials);
+		commit.setMessage("Auto Commit");
+		try {
+			commit.call();
+		} catch (AbortedByHookException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ConcurrentRefUpdateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoHeadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoMessageException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnmergedPathsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (WrongRepositoryStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (GitAPIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
