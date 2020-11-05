@@ -1,3 +1,4 @@
+import org.eclipse.jgit.*;
 
 public class GitHubHelper {
 
