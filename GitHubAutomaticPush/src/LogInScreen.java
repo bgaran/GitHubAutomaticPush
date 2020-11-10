@@ -24,7 +24,7 @@ public class LogInScreen extends JPanel{
 	
 	private Font bigWords; //used to resize the text
 
-	public LogInScreen(int height, int width, Color bgColor) {
+	public LogInScreen(int width, int height, Color bgColor) {
 		setPreferredSize(new Dimension(width, height));
 		setBackground(bgColor); 
 
@@ -53,6 +53,15 @@ public class LogInScreen extends JPanel{
 		passwordTextField.setFont(bigWords);
 		submitButton.setFont(bigWords);
 		darkModeToggleButton.setFont(bigWords);
+		
+		this.add(infoLabel);
+		this.add(usernameLabel);
+		this.add(usernameTextField);
+		this.add(passwordLabel);
+		this.add(passwordTextField);
+		this.add(submitButton);
+		this.add(feedbackLabel);
+		this.add(darkModeToggleButton);
 		
 	}
 }
