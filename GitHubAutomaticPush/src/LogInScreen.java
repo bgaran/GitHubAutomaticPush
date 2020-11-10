@@ -31,6 +31,7 @@ public class LogInScreen extends JPanel{
 		this.setFocusable(true);
 		this.setFocusTraversalKeysEnabled(false);
 		
+		//initialize all UI elements
 		infoLabel = new JLabel("Please input your github credentials below.");
 		usernameLabel = new JLabel("Username: ");
 		passwordLabel = new JLabel("Password: ");
@@ -40,11 +41,11 @@ public class LogInScreen extends JPanel{
 		passwordTextField = new JTextField("Password...");
 		
 		submitButton = new JButton("submit");
-		
 		darkModeToggleButton = new JToggleButton("Toggle Dark Mode Theme");
 		
-		bigWords = new Font("Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
+		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
 		
+		//set all UI elements to share this same font
 		infoLabel.setFont(bigWords);
 		usernameLabel.setFont(bigWords);
 		passwordLabel.setFont(bigWords);
@@ -54,6 +55,18 @@ public class LogInScreen extends JPanel{
 		submitButton.setFont(bigWords);
 		darkModeToggleButton.setFont(bigWords);
 		
+		//position all UI elements correctly
+		infoLabel.setPreferredSize(new Dimension(width/2,height/4)); 
+		usernameLabel.setPreferredSize(new Dimension(width/4,height/8)); 
+		usernameTextField.setPreferredSize(new Dimension(width/2,height/8)); 
+		passwordLabel.setPreferredSize(new Dimension(width/4,height/8)); 
+		passwordTextField.setPreferredSize(new Dimension(width/2,height/8)); 
+		submitButton.setPreferredSize(new Dimension(width/2,height/4)); 
+		feedbackLabel.setPreferredSize(new Dimension(width/2,height/4)); 
+		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/4)); 
+
+		
+		//finally, add all UI elements to the LogInScreen
 		this.add(infoLabel);
 		this.add(usernameLabel);
 		this.add(usernameTextField);
