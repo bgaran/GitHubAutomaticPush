@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -76,5 +80,46 @@ public class LogInScreen extends JPanel{
 		this.add(feedbackLabel);
 		this.add(darkModeToggleButton);
 		
+		
+		submitButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO
+			}
+			
+		});
+		
+		//If default text, sets it to blank
+		usernameTextField.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if(usernameTextField.getText().equals("Username...")) {
+					usernameTextField.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+			}
+			
+		});
+		
+		//If default text, sets it to blank
+		passwordTextField.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if(passwordTextField.getText().equals("Password...")) {
+					passwordTextField.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+			}
+			
+		});
 	}
 }
