@@ -56,14 +56,14 @@ public class LogInScreen extends JPanel{
 		darkModeToggleButton.setFont(bigWords);
 		
 		//position all UI elements correctly
-		infoLabel.setPreferredSize(new Dimension(width/2,height/4)); 
+		infoLabel.setPreferredSize(new Dimension(width*3/4,height/4)); //width*3/4 is a janky way of ensuring it's on its own line
 		usernameLabel.setPreferredSize(new Dimension(width/4,height/8)); 
 		usernameTextField.setPreferredSize(new Dimension(width/2,height/8)); 
 		passwordLabel.setPreferredSize(new Dimension(width/4,height/8)); 
 		passwordTextField.setPreferredSize(new Dimension(width/2,height/8)); 
-		submitButton.setPreferredSize(new Dimension(width/2,height/4)); 
-		feedbackLabel.setPreferredSize(new Dimension(width/2,height/4)); 
-		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/4)); 
+		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
+		feedbackLabel.setPreferredSize(new Dimension(width*3/4,height/4)); //width*3/4 is a janky way of ensuring it's on its own line
+		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
 
 		
 		//finally, add all UI elements to the LogInScreen
