@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
-public class LogInScreen extends JPanel{
+public class LogInScreen extends JPanel implements MouseListener{
 	
 	String filePath;
 	//GitHub github
@@ -44,7 +46,7 @@ public class LogInScreen extends JPanel{
 		usernameTextField = new JTextField("Username...");
 		passwordTextField = new JTextField("Password...");
 		
-		submitButton = new JButton("submit");
+		submitButton = new JButton("Submit");
 		darkModeToggleButton = new JToggleButton("Toggle Dark Mode Theme");
 		
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
@@ -102,6 +104,9 @@ public class LogInScreen extends JPanel{
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
+				if(usernameTextField.getText().equals("")) {
+					usernameTextField.setText("Username...");
+				}
 			}
 			
 		});
@@ -118,8 +123,26 @@ public class LogInScreen extends JPanel{
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
+				if(passwordTextField.getText().equals("")) {
+					passwordTextField.setText("Password...");
+				}
 			}
 			
 		});
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {}
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+	
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		infoLabel.requestFocusInWindow();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
 }
