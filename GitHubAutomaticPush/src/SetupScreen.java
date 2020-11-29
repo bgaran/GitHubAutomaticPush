@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -19,7 +21,9 @@ import javax.swing.JToggleButton;
 public class SetupScreen extends JPanel{
 	
 	String filePath;
-	//GitHub github
+	private GitHubHelper GHH = new GitHubHelper();
+	
+	private FrameManager frameManager; //LINKED TO SWAP PANELS
 	
 	private JLabel infoLabel, filePathLabel, feedbackLabel;
 	
@@ -35,12 +39,14 @@ public class SetupScreen extends JPanel{
 	
 	private Font bigWords; //used to resize the text
 
-	public SetupScreen(int width, int height, Color bgColor) {
+	public SetupScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
 		setBackground(bgColor); 
 
 		this.setFocusable(true);
 		this.setFocusTraversalKeysEnabled(false);
+		
+		this.frameManager = frameManager;
 		
 		//initialize all UI elements
 		infoLabel = new JLabel("Please input your file path to current project src folder.");
@@ -52,7 +58,6 @@ public class SetupScreen extends JPanel{
 		submitButton = new JButton("Submit");
 		browseButton = new JButton("Browse...");
 		
-		//author April
 		//radio buttons and their group
 		windowsButton = new JRadioButton("Windows");
 		macButton = new JRadioButton("Mac");
@@ -85,7 +90,7 @@ public class SetupScreen extends JPanel{
 		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
 
 		
-		//finally, add all UI elements to the LogInScreen
+		//finally, add all UI elements to the SetupScreen
 		this.add(infoLabel);
 		this.add(filePathLabel);
 		this.add(filePathTextField);
@@ -99,7 +104,15 @@ public class SetupScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO
+				//filePath = filePathTextField.getText();
+				//GHH.ConnectToGitHub(username, password, filePath);
+				
+				//REPLACE THIS CODE LATER
+				infoLabel.setText("success");
+				//if infoLabel 
+				if(infoLabel.getText().equals("success")) {
+					frameManager.swapPanel("center");
+				}
 			}
 			
 		});
@@ -125,7 +138,6 @@ public class SetupScreen extends JPanel{
 			
 		});
 		
-		//author April
 		//If Windows radio button is selected
 		windowsButton.addActionListener(new ActionListener() {
 			@Override 
@@ -146,13 +158,46 @@ public class SetupScreen extends JPanel{
 			}
 		});
 		
-		//Detect the user's OS and select the respective radio button
+		//When darkModeToggleButton is toggled
+		darkModeToggleButton.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				int state = e.getStateChange();
+				
+                if (state == ItemEvent.SELECTED) { 
+                	//switch ON dark mode
+                    setBackground(Color.DARK_GRAY);
+                    infoLabel.setForeground(Color.white);
+                    filePathLabel.setForeground(Color.white);
+                    windowsButton.setBackground(Color.DARK_GRAY);
+                    windowsButton.setForeground(Color.white);
+                    macButton.setBackground(Color.DARK_GRAY);
+                    macButton.setForeground(Color.white);
+                    feedbackLabel.setForeground(Color.white);
+                    
+                } 
+                else {  
+                	//switch OFF dark mode
+                    setBackground(bgColor);
+                    infoLabel.setForeground(Color.black);
+                    filePathLabel.setForeground(Color.black);
+                    windowsButton.setBackground(Color.white);
+                    windowsButton.setForeground(Color.black);
+                    macButton.setBackground(Color.white);
+                    macButton.setForeground(Color.black);
+                    feedbackLabel.setForeground(Color.black);
+                }
+			}
+			
+		});
+		
+		//Detect the user's OS and selects the respective radio button
 		if(System.getProperty("os.name").equals("Windows 10")) { //MAY NEED CHANGING
 			windowsButton.setSelected(true);
 		} else if (System.getProperty("os.name").equals("Mac")) { //MAY NEED CHANGING
 			macButton.setSelected(true);
 		}
-
-		
+				
 	}
 }

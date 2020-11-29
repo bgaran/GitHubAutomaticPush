@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,6 +31,8 @@ public class LoginScreen extends JPanel{
 	private JToggleButton darkModeToggleButton; //used to toggle between dark mode and light mode
 	
 	private Font bigWords; //used to resize the text
+	
+	public String username, password;
 
 	public LoginScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
@@ -93,7 +97,8 @@ public class LoginScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO
+				username = usernameTextField.getText();
+				password = passwordTextField.getText();
 				
 				//REPLACE THIS CODE LATER
 				infoLabel.setText("success");
@@ -146,5 +151,34 @@ public class LoginScreen extends JPanel{
 			}
 			
 		});
+		
+		//When darkModeToggleButton is toggled
+		darkModeToggleButton.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				int state = e.getStateChange();
+				
+                if (state == ItemEvent.SELECTED) { 
+                	//switch ON dark mode
+                    setBackground(Color.DARK_GRAY);
+                    infoLabel.setForeground(Color.white);
+                    usernameLabel.setForeground(Color.white);
+                    passwordLabel.setForeground(Color.white);
+                    feedbackLabel.setForeground(Color.white);
+                    
+                } 
+                else {  
+                	//switch OFF dark mode
+                    setBackground(bgColor);
+                    infoLabel.setForeground(Color.black);
+                    usernameLabel.setForeground(Color.black);
+                    passwordLabel.setForeground(Color.black);
+                    feedbackLabel.setForeground(Color.black);
+                }
+			}
+			
+		});
+		
 	}
 }
