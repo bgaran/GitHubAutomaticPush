@@ -24,6 +24,8 @@ public class FrameManager {
 	
 	private SetupScreen setup;
 	
+	private GitCommandCenterScreen center;
+	
 	private JFrame frame;
 	
 	private Container container;
@@ -38,7 +40,8 @@ public class FrameManager {
 		screenHeight = screen.height/2;
 		
 		login = new LoginScreen(screenWidth, screenHeight, Color.white, this);
-		setup = new SetupScreen(screenWidth, screenHeight, Color.white);
+		setup = new SetupScreen(screenWidth, screenHeight, Color.white, this);
+		center = new GitCommandCenterScreen(screenWidth, screenHeight, Color.white);
 		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,6 +60,9 @@ public class FrameManager {
 		}
 		else if(panelName.equals("setup") || panelName.equals("Setup")) {
 			swapPanel(setup);
+		}
+		else if (panelName.equals("center") || panelName.equals("Center")){
+			swapPanel(center);
 		}
 		else {
 			System.err.println("Please use a valid name to swap to.");
