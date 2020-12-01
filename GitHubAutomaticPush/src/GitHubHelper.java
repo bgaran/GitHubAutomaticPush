@@ -6,31 +6,11 @@ import java.io.OutputStreamWriter;
 
 public class GitHubHelper {
 	
-	public GitHubHelper() {
-		String os = System.getProperty("os.name");
-		String projectName = "testPull";
-		String repoPath = "https://github.com/bgaran/SeniorDesignTemplateProject.git";
-		
-		if (os.contains("Win")) {
-			try {
-				//TODO: not focus on the terminal
-				Runtime.getRuntime().exec("cmd.exe /c start cmd.exe /K cd ../"+projectName);//+
-						//" && cd ../");// cmd.exe /K cd ../"+projectName);
-			
-				//this stuff doesn't work correctly. don't know how to actually write it
-				/*BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-				writer.newLine();
-	            writer.write("cd ../"+projectName);
-	            writer.newLine();
-	            //writer.flush();
-	            writer.close();*/
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
+	String os = System.getProperty("os.name");
+	String projectName = "SeniorDesignTemplateProject";	//will need to be user input
+	String repoPath = "https://github.com/bgaran/SeniorDesignTemplateProject.git";	//if using existing repo, will need to be user input
 	
+		
 	/**
 	 * This method connects to GitHub with the given user name and password
 	 * @param username - GitHub User Name (String)
@@ -38,7 +18,6 @@ public class GitHubHelper {
 	 */
 	public String ConnectToGitHub(String username, String password, String filePath)
 	{
-		
 		return "";
 	}
 	
@@ -48,6 +27,18 @@ public class GitHubHelper {
 	 */
 	public void githubPush()
 	{
-		
+		if (os.contains("Win")) {
+			//TODO: not focus on the terminal
+			try {
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd ../"+projectName+"\""
+						//may or may not need these; if so, need to be user input
+						//+ " && git config --global user.email \"ccrawford21@jcu.edu\"" 
+						//+ " && git config --global user.name \"Courtney\""
+						+ "\" && git add . && git commit -m \"Autocommit\" && git push\"");
+	            
+	        } catch (IOException e) {
+	            System.out.println(e.toString());
+	        }
+		}
 	}
 }
