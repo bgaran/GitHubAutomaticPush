@@ -6,28 +6,11 @@ import java.io.OutputStreamWriter;
 
 public class GitHubHelper {
 	
-	public GitHubHelper() {
-		String os = System.getProperty("os.name");
-		String projectName = "SeniorDesignTemplateProject";
-		String repoPath = "https://github.com/bgaran/SeniorDesignTemplateProject.git";
-		
-		if (os.contains("Win")) {
-				//TODO: not focus on the terminal
-				try {
-					Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd ../"+projectName+"\""
-							+ "\" && git status"
-							//may or may not need these
-							//+ " && git config --global user.email \"ccrawford21@jcu.edu\"" 
-							//+ " && git config --global user.name \"Courtney\""
-							+ " && git add . && git commit -m \"testing commit and push\" && git push\"");
-		            
-		        } catch (IOException e) {
-		            System.out.println(e.toString());
-		        }
-		}
-	}
-
+	String os = System.getProperty("os.name");
+	String projectName = "SeniorDesignTemplateProject";	//will need to be user input
+	String repoPath = "https://github.com/bgaran/SeniorDesignTemplateProject.git";	//if using existing repo, will need to be user input
 	
+		
 	/**
 	 * This method connects to GitHub with the given user name and password
 	 * @param username - GitHub User Name (String)
@@ -35,7 +18,6 @@ public class GitHubHelper {
 	 */
 	public String ConnectToGitHub(String username, String password, String filePath)
 	{
-		
 		return "";
 	}
 	
@@ -45,6 +27,18 @@ public class GitHubHelper {
 	 */
 	public void githubPush()
 	{
-		
+		if (os.contains("Win")) {
+			//TODO: not focus on the terminal
+			try {
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd ../"+projectName+"\""
+						//may or may not need these; if so, need to be user input
+						//+ " && git config --global user.email \"ccrawford21@jcu.edu\"" 
+						//+ " && git config --global user.name \"Courtney\""
+						+ "\" && git add . && git commit -m \"Autocommit\" && git push\"");
+	            
+	        } catch (IOException e) {
+	            System.out.println(e.toString());
+	        }
+		}
 	}
 }
