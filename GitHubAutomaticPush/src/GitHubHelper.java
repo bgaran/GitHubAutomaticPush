@@ -8,25 +8,22 @@ public class GitHubHelper {
 	
 	public GitHubHelper() {
 		String os = System.getProperty("os.name");
-		String projectName = "testPull";
+		String projectName = "SeniorDesignTemplateProject";
 		String repoPath = "https://github.com/bgaran/SeniorDesignTemplateProject.git";
 		
 		if (os.contains("Win")) {
-			try {
 				//TODO: not focus on the terminal
-				Runtime.getRuntime().exec("cmd.exe /c start cmd.exe /K cd ../"+projectName);//+
-						//" && cd ../");// cmd.exe /K cd ../"+projectName);
-			
-				//this stuff doesn't work correctly. don't know how to actually write it
-				/*BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-				writer.newLine();
-	            writer.write("cd ../"+projectName);
-	            writer.newLine();
-	            //writer.flush();
-	            writer.close();*/
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				try {
+					Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd ../"+projectName+"\""
+							+ "\" && git status"
+							//may or may not need these
+							//+ " && git config --global user.email \"ccrawford21@jcu.edu\"" 
+							//+ " && git config --global user.name \"Courtney\""
+							+ " && git add . && git commit -m \"testing commit and push\" && git push\"");
+		            
+		        } catch (IOException e) {
+		            System.out.println(e.toString());
+		        }
 		}
 	}
 
