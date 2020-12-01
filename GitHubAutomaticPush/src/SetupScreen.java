@@ -37,7 +37,7 @@ public class SetupScreen extends JPanel{
 	
 	private JToggleButton darkModeToggleButton; //used to toggle between dark mode and light mode
 	
-	private Font bigWords; //used to resize the text
+	private Font bigWords, mediumWords; //used to resize the text
 
 	public SetupScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
@@ -69,6 +69,7 @@ public class SetupScreen extends JPanel{
 		darkModeToggleButton = new JToggleButton("Toggle Dark Mode Theme");
 		
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
+		mediumWords = new Font("Sans Serif", Font.PLAIN, width/60);
 		
 		//set all UI elements to share this same font
 		infoLabel.setFont(bigWords);
@@ -77,6 +78,8 @@ public class SetupScreen extends JPanel{
 		filePathTextField.setFont(bigWords);
 		submitButton.setFont(bigWords);
 		browseButton.setFont(bigWords);
+		windowsButton.setFont(mediumWords);
+		macButton.setFont(mediumWords);
 		darkModeToggleButton.setFont(bigWords);
 		
 		//position all UI elements correctly
