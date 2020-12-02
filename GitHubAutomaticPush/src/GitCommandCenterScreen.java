@@ -22,7 +22,7 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private JLabel infoLabel, feedbackLabel;
 		
-	private JButton pushButton, pullButton;
+	private JButton pushButton, pullButton, diffButton, startButton, stopButton;
 	
 	private JToggleButton darkModeToggleButton; //used to toggle between dark mode and light mode
 	
@@ -41,8 +41,12 @@ public class GitCommandCenterScreen extends JPanel{
 		
 		pushButton = new JButton("Push");
 		pullButton = new JButton("Pull");
+		diffButton = new JButton("Diff");
+		startButton = new JButton("Start");
+		stopButton = new JButton("Stop");
+
 		
-		darkModeToggleButton = new JToggleButton("Toggle Dark Mode Theme");
+		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
 		
@@ -51,23 +55,33 @@ public class GitCommandCenterScreen extends JPanel{
 		feedbackLabel.setFont(bigWords);
 		pushButton.setFont(bigWords);
 		pullButton.setFont(bigWords);
+		diffButton.setFont(bigWords);
+		startButton.setFont(bigWords);
+		stopButton.setFont(bigWords);
 		darkModeToggleButton.setFont(bigWords);
 		
 		//position all UI elements correctly
 		infoLabel.setPreferredSize(new Dimension(width*3/4,height/4)); //width*3/4 is a janky way of ensuring it's on its own line
-		pushButton.setPreferredSize(new Dimension(width/4,height/8));
-		pullButton.setPreferredSize(new Dimension(width*3/4,height/8));
+		pushButton.setPreferredSize(new Dimension(width/4,height/10));
+		pullButton.setPreferredSize(new Dimension(width*3/4,height/10));
+		diffButton.setPreferredSize(new Dimension(width*3/4,height/10));
+		startButton.setPreferredSize(new Dimension(width*3/4,height/10));
+		stopButton.setPreferredSize(new Dimension(width*3/4,height/10));
 		feedbackLabel.setPreferredSize(new Dimension(width*3/4,height/5)); //width*3/4 is a janky way of ensuring it's on its own line
-		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
+		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/10)); 
 
 		
 		//finally, add all UI elements to the GitCommandCenterScreen
 		this.add(infoLabel);
 		this.add(pushButton);
 		this.add(pullButton);
+		this.add(diffButton);
+		this.add(startButton);
+		this.add(stopButton);
 		this.add(feedbackLabel);
 		this.add(darkModeToggleButton);
 		
+		//Button actions when clicked
 		pushButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -78,6 +92,33 @@ public class GitCommandCenterScreen extends JPanel{
 		});
 		
 		pullButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO
+			}
+			
+		});
+		
+		diffButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO
+			}
+			
+		});
+		
+		startButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO
+			}
+			
+		});
+		
+		stopButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

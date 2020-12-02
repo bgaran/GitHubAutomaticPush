@@ -66,7 +66,7 @@ public class SetupScreen extends JPanel{
 		group.add(macButton);
 		
 		
-		darkModeToggleButton = new JToggleButton("Toggle Dark Mode Theme");
+		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
 		mediumWords = new Font("Sans Serif", Font.PLAIN, width/60);
@@ -196,9 +196,9 @@ public class SetupScreen extends JPanel{
 		});
 		
 		//Detect the user's OS and selects the respective radio button
-		if(System.getProperty("os.name").equals("Windows 10")) { //MAY NEED CHANGING
+		if(System.getProperty("os.name").contains("Windows") || System.getProperty("os.name").contains("windows")) {
 			windowsButton.setSelected(true);
-		} else if (System.getProperty("os.name").equals("Mac")) { //MAY NEED CHANGING
+		} else if (System.getProperty("os.name").contains("Mac") || System.getProperty("os.name").contains("mac")) {
 			macButton.setSelected(true);
 		}
 				
