@@ -19,6 +19,8 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	String filePath;
 	
+	private FrameManager frameManager; //LINKED TO SWAP PANELS
+	
 	private JLabel infoLabel, feedbackLabel;
 		
 	private JButton pushButton, pullButton, diffButton, startButton, stopButton;
@@ -27,12 +29,14 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private Font bigWords; //used to resize the text
 
-	public GitCommandCenterScreen(int width, int height, Color bgColor) {
+	public GitCommandCenterScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
 		setBackground(bgColor); 
 
 		this.setFocusable(true);
 		this.setFocusTraversalKeysEnabled(false);
+		
+		this.frameManager = frameManager;
 		
 		//initialize all UI elements
 		infoLabel = new JLabel("Perform git commands using the buttons.");
@@ -85,7 +89,7 @@ public class GitCommandCenterScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO
+				frameManager.git.githubPush();
 			}
 			
 		});
@@ -94,7 +98,7 @@ public class GitCommandCenterScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO
+				frameManager.git.githubPull();
 			}
 			
 		});
@@ -103,7 +107,7 @@ public class GitCommandCenterScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO
+				frameManager.git.githubDiff();
 			}
 			
 		});

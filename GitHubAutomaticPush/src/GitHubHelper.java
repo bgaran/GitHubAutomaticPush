@@ -1,10 +1,9 @@
 import java.io.IOException;
 
 public class GitHubHelper {
-	
 	String os = System.getProperty("os.name");
-	String projectName = "SeniorDesignTemplateProject";	//will need to be user input
-	String repoPath = "https://github.com/bgaran/SeniorDesignTemplateProject.git";	//if using existing repo, will need to be user input
+	//String repoPath = "https://github.com/bgaran/SeniorDesignTemplateProject.git";	//if using existing repo, will need to be user input
+	String projectPath;
 	
 		
 	/**
@@ -26,11 +25,13 @@ public class GitHubHelper {
 		if (os.contains("Win")) {
 			//TODO: not focus on the terminal
 			try {
-				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd ../"+projectName+"\""
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+projectPath+"\""
 						//may or may not need these; if so, need to be user input
 						//+ " && git config --global user.email \"ccrawford21@jcu.edu\"" 
 						//+ " && git config --global user.name \"Courtney\""
-						+ "\" && git add . && git commit -m \"Autocommit\" && git push\"");
+						+ "\" && git add . && git commit -m \"Autocommit\" && git push"
+						+ " && pause"
+						+ " && exit\"");
 	            
 	        } catch (IOException e) {
 	            System.out.println(e.toString());
@@ -50,8 +51,10 @@ public class GitHubHelper {
 		if (os.contains("Win")) {
 			//TODO: not focus on the terminal
 			try {
-				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd ../"+projectName+"\""
-						+ "\" && git diff\"");
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+projectPath+"\""
+						+ "\" && git diff"
+						+ " && pause"
+						+ " && exit\"");
 	            
 	        } catch (IOException e) {
 	            System.out.println(e.toString());
@@ -67,8 +70,10 @@ public class GitHubHelper {
 		if (os.contains("Win")) {
 			//TODO: not focus on the terminal
 			try {
-				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd ../"+projectName+"\""
-						+ "\" && git pull\"");
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+projectPath+"\""
+						+ "\" && git pull"
+						+ " && pause"
+						+ " && exit\"");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}     

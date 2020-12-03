@@ -44,7 +44,7 @@ public class FrameManager {
 		
 		login = new LoginScreen(screenWidth, screenHeight, Color.white, this);
 		setup = new SetupScreen(screenWidth, screenHeight, Color.white, this);
-		center = new GitCommandCenterScreen(screenWidth, screenHeight, Color.white);
+		center = new GitCommandCenterScreen(screenWidth, screenHeight, Color.white, this);
 		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

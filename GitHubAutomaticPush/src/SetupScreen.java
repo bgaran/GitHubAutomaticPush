@@ -106,8 +106,9 @@ public class SetupScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//filePath = filePathTextField.getText();
+				filePath = filePathTextField.getText();
 				//GHH.ConnectToGitHub(username, password, filePath);
+				frameManager.git.projectPath=filePath;
 				
 				//REPLACE THIS CODE LATER
 				infoLabel.setText("success");
