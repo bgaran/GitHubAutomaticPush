@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -58,6 +60,8 @@ public class SetupScreen extends JPanel{
 		submitButton = new JButton("Submit");
 		browseButton = new JButton("Browse...");
 		
+		darkModeToggleButton = new JToggleButton("Dark Mode");
+		
 		//radio buttons and their group
 		windowsButton = new JRadioButton("Windows");
 		macButton = new JRadioButton("Mac");
@@ -68,12 +72,13 @@ public class SetupScreen extends JPanel{
 		//initialize file chooser
 		fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File("."));
-		fileChooser.setDialogTitle("Test");
+		fileChooser.setDialogTitle("Select the current project's src folder:");
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.setPreferredSize(new Dimension(width/2,height/2));
 		
-		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
+		//create fonts
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
 		mediumWords = new Font("Sans Serif", Font.PLAIN, width/60);
 		
@@ -88,9 +93,13 @@ public class SetupScreen extends JPanel{
 		macButton.setFont(mediumWords);
 		darkModeToggleButton.setFont(bigWords);
 		
+		//initialize color of text fields to default, change color once focus gained
+		filePathTextField.setForeground(Color.gray);
+		
 		//position all UI elements correctly
 		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width-1 is a janky way of ensuring it's on its own line
-		filePathLabel.setPreferredSize(new Dimension(width/4,height/8)); 
+		filePathLabel.setPreferredSize(new Dimension(width/6,height/8));
+		browseButton.setPreferredSize(new Dimension(width/6,height/8));
 		filePathTextField.setPreferredSize(new Dimension(width/2,height/8)); 
 		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
 		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
@@ -98,10 +107,13 @@ public class SetupScreen extends JPanel{
 		macButton.setPreferredSize(new Dimension(width/8,height/10));
 		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
 
+		//align all UI elements correctly
+	    infoLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		//finally, add all UI elements to the SetupScreen
 		this.add(infoLabel);
 		this.add(filePathLabel);
+		this.add(browseButton);
 		this.add(filePathTextField);
 		this.add(submitButton);
 		this.add(windowsButton);
@@ -117,20 +129,29 @@ public class SetupScreen extends JPanel{
 				//GHH.ConnectToGitHub(username, password, filePath);
 				
 				//REPLACE THIS CODE LATER
-				infoLabel.setText("success");
+				feedbackLabel.setText("success");
 				//if infoLabel 
-				if(infoLabel.getText().equals("success")) {
+				if(feedbackLabel.getText().equals("success")) {
 					frameManager.swapPanel("center");
 				}
 			}
 			
 		});
 		
+		SetupScreen setup = this; //used for the showOpenDialog method that prompts the user to choose what directory to use
+		
 		browseButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(fileChooser.getCurrentDirectory());
+				if (fileChooser.showOpenDialog(setup) == JFileChooser.APPROVE_OPTION) { 
+				    filePathTextField.setText(""+fileChooser.getSelectedFile());
+				    feedbackLabel.setText("Please select your src folder.");
+				}
+				else {
+					feedbackLabel.setText("Please select your src folder.");
+					//TODO check for whether or not the file path ends in /src/, if not, warn the user.
+				}
 			}
 			
 		});

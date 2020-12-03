@@ -101,9 +101,9 @@ public class LoginScreen extends JPanel{
 				password = passwordTextField.getText();
 				
 				//REPLACE THIS CODE LATER
-				infoLabel.setText("success");
+				feedbackLabel.setText("success");
 				//if infoLabel 
-				if(infoLabel.getText().equals("success")) {
+				if(feedbackLabel.getText().equals("success")) {
 					frameManager.swapPanel("setup");
 				}
 			}
