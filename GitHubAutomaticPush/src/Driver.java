@@ -2,8 +2,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.util.stream.Collectors;
+import java.io.BufferedReader;
 
 import javax.swing.JFrame;
+import javax.xml.stream.events.Characters;
+
+
 
 public class Driver {
 
@@ -40,24 +48,44 @@ public class Driver {
 		} else if (os.contains("Mac")) {
 			System.out.println(os);
 			try {
-				String command=" cd "+projectPath
-						+ "\" && git status"
-						+ " && git config --global user.email \"bgaran21@jcu.edu\"" 
-						+ " && git config --global user.name \"Breanna\""
-						 + " && git add . && git commit -m \"testing auto commit\" && git push\"";
-				String[] cmd2 = { "/bin/bash -c "+command};
-				String[] cmd = { "open -a /Applications/Utilities/Terminal.app"
-//        				+ "\" && cd "+projectPath
-//                        + "\" && git status"
-//                        + " && git config --global user.email \"bgaran21@jcu.edu\"" 
-//                        + " && git config --global user.name \"Breanna\""
-//                        + " && git add . && git commit -m \"testing auto commit\" && git push\""
-				};
-				Runtime.getRuntime().exec(cmd2);
+				
+				String command=" cd "+projectPath //+" && git pull "//+" && git add . ; git commit -m \"testing auto commit\" ; git push"
+						//+ "\" && git status"
+						//+ " && git config --global user.email \"bgaran21@jcu.edu\"" 
+						//+ " && git config --global user.name \"Breanna\""
+						 + " && git add . ; git commit -m \"testing auto commit\" ; git push"
+						;
+			
+				String[] cmd = {"bash","-c", command}; 
+				Process p = Runtime.getRuntime().exec(cmd);
+						p.waitFor();
+		                int status = p.exitValue();
+		                System.out.println("Program terminated with exit status " + status);
+		                if (status != 0) {
+		                	
+		                	String result = new BufferedReader(new InputStreamReader(p.getErrorStream()))
+		                			  .lines().collect(Collectors.joining("\n"));
+		                	System.out.println(result);
+		                }
+		                else {
+		                	
+		                	String result = new BufferedReader(new InputStreamReader(p.getInputStream()))
+		                			  .lines().collect(Collectors.joining("\n"));
+		                	System.out.println(result);
+		                }
+		                //Runtime.getRuntime().exec("/bin/bash -c /Applications/Utilities/Terminal.app");
+				
+		            } 
 
-			} catch (IOException e) {
+//
+			 catch (IOException e) {
 				System.out.println(e.toString());
-			}
+			} 
+			catch (Exception e) {
+                System.out.println("Caught exception");
+        }
+			
 		}
 	}
 }
+
