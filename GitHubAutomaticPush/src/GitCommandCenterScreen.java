@@ -18,7 +18,6 @@ import javax.swing.JToggleButton;
 public class GitCommandCenterScreen extends JPanel{
 	
 	String filePath;
-	private GitHubHelper GHH = new GitHubHelper();
 	
 	private JLabel infoLabel, feedbackLabel;
 		

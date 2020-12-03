@@ -1,8 +1,3 @@
-/**
- * Manages the frame to swap between panels
- * @author Griffin White
- *
- */
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -12,6 +7,11 @@ import javax.swing.JPanel;
 
 import java.awt.Container;
 
+/**
+ * Manages the frame to swap between panels
+ * @author Griffin White
+ *
+ */
 public class FrameManager {
 
 	Dimension screen;
@@ -30,11 +30,14 @@ public class FrameManager {
 	
 	private Container container;
 	
+	public GitHubHelper git; //made public because it is not instantiated
 	
 	/**
 	 * Does things that would otherwise be in the main method, needed so that the driver can feed itself into the panels so that swapping can occur.
 	 */
 	public FrameManager() {
+		git = new GitHubHelper();
+		
 		screen = Toolkit.getDefaultToolkit().getScreenSize();
 		screenWidth = screen.width/2;
 		screenHeight = screen.height/2;
@@ -55,13 +58,14 @@ public class FrameManager {
 	 * @param panelName - simply the name of the class you wish to set 
 	 */
 	public void swapPanel(String panelName) {
-		if(panelName.equals("login") || panelName.equals("Login")) {
+		panelName = panelName.toLowerCase();
+		if(panelName.equals("login")) {
 			swapPanel(login);
 		}
-		else if(panelName.equals("setup") || panelName.equals("Setup")) {
+		else if(panelName.equals("setup")) {
 			swapPanel(setup);
 		}
-		else if (panelName.equals("center") || panelName.equals("Center")){
+		else if (panelName.equals("center")){
 			swapPanel(center);
 		}
 		else {

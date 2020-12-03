@@ -21,7 +21,6 @@ import javax.swing.JToggleButton;
 public class SetupScreen extends JPanel{
 	
 	String filePath;
-	private GitHubHelper GHH = new GitHubHelper();
 	
 	private FrameManager frameManager; //LINKED TO SWAP PANELS
 	
