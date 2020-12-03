@@ -131,7 +131,7 @@ public class SetupScreen extends JPanel{
 				
 				//REPLACE THIS CODE LATER
 				feedbackLabel.setText("success");
-				//if infoLabel 
+				//if feedbackLabel 
 				if(feedbackLabel.getText().equals("success")) {
 					frameManager.swapPanel("center");
 				}
