@@ -72,13 +72,13 @@ public class LoginScreen extends JPanel{
 		passwordTextField.setForeground(Color.gray);
 		
 		//position all UI elements correctly
-		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width*3/4 is a janky way of ensuring it's on its own line
+		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width-1 is a janky way of ensuring it's on its own line
 		usernameLabel.setPreferredSize(new Dimension(width/4,height/8)); 
 		usernameTextField.setPreferredSize(new Dimension(width/2,height/8)); 
 		passwordLabel.setPreferredSize(new Dimension(width/4,height/8)); 
 		passwordTextField.setPreferredSize(new Dimension(width/2,height/8)); 
 		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
-		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width*3/4 is a janky way of ensuring it's on its own line
+		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
 		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
 
 		

@@ -7,6 +7,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -20,8 +21,6 @@ import javax.swing.JToggleButton;
 
 public class SetupScreen extends JPanel{
 	
-	String filePath;
-	
 	private FrameManager frameManager; //LINKED TO SWAP PANELS
 	
 	private JLabel infoLabel, filePathLabel, feedbackLabel;
@@ -29,6 +28,8 @@ public class SetupScreen extends JPanel{
 	private JTextField filePathTextField;
 	
 	private JFileChooser fileChooser; //TODO: INITIALIZE IN CONSTRUCTOR & IMPLEMENT
+	
+	private String filePath;
 	
 	private JRadioButton windowsButton, macButton;
 		
@@ -64,6 +65,12 @@ public class SetupScreen extends JPanel{
 		group.add(windowsButton);
 		group.add(macButton);
 		
+		//initialize file chooser
+		fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File("."));
+		fileChooser.setDialogTitle("Test");
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		fileChooser.setAcceptAllFileFilterUsed(false);
 		
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
@@ -82,11 +89,11 @@ public class SetupScreen extends JPanel{
 		darkModeToggleButton.setFont(bigWords);
 		
 		//position all UI elements correctly
-		infoLabel.setPreferredSize(new Dimension(width*3/4,height/4)); //width*3/4 is a janky way of ensuring it's on its own line
+		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width-1 is a janky way of ensuring it's on its own line
 		filePathLabel.setPreferredSize(new Dimension(width/4,height/8)); 
 		filePathTextField.setPreferredSize(new Dimension(width/2,height/8)); 
 		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
-		feedbackLabel.setPreferredSize(new Dimension(width*3/4,height/5)); //width*3/4 is a janky way of ensuring it's on its own line
+		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
 		windowsButton.setPreferredSize(new Dimension(width/8,height/10));
 		macButton.setPreferredSize(new Dimension(width/8,height/10));
 		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
@@ -115,6 +122,15 @@ public class SetupScreen extends JPanel{
 				if(infoLabel.getText().equals("success")) {
 					frameManager.swapPanel("center");
 				}
+			}
+			
+		});
+		
+		browseButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(fileChooser.getCurrentDirectory());
 			}
 			
 		});
