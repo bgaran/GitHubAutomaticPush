@@ -23,7 +23,7 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private JLabel infoLabel, feedbackLabel;
 		
-	private JButton pushButton, pullButton, diffButton, startButton, stopButton;
+	private JButton pushButton, pullButton, diffButton, startButton, stopButton, backButton; //TODO: implement backButton
 	
 	private JToggleButton darkModeToggleButton; //used to toggle between dark mode and light mode
 	
