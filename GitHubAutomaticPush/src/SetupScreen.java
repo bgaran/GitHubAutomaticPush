@@ -29,13 +29,13 @@ public class SetupScreen extends JPanel{
 	
 	private JTextField filePathTextField;
 	
-	private JFileChooser fileChooser; //TODO: INITIALIZE IN CONSTRUCTOR & IMPLEMENT
+	private JFileChooser fileChooser;
 	
 	private String filePath;
 	
 	private JRadioButton windowsButton, macButton;
 		
-	private JButton submitButton, browseButton;
+	private JButton submitButton, browseButton, backButton; //TODO: implement backButton
 	
 	private JToggleButton darkModeToggleButton; //used to toggle between dark mode and light mode
 	
@@ -131,7 +131,7 @@ public class SetupScreen extends JPanel{
 				
 				//REPLACE THIS CODE LATER
 				feedbackLabel.setText("success");
-				//if infoLabel 
+				//if feedbackLabel 
 				if(feedbackLabel.getText().equals("success")) {
 					frameManager.swapPanel("center");
 				}
