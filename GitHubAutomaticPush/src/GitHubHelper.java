@@ -24,7 +24,7 @@ public class GitHubHelper {
 	 * This method saves the current progress and pushes the current project to the
 	 * connected GitHub repository
 	 */
-	public void githubPush() {
+	public String githubPush() {
 		if (os.contains("Win")) {
 			// TODO: not focus on the terminal
 			try {
@@ -33,9 +33,10 @@ public class GitHubHelper {
 				// + " && git config --global user.email \"ccrawford21@jcu.edu\""
 				// + " && git config --global user.name \"Courtney\""
 						+ "\" && git add . && git commit -m \"Autocommit\" && git push" + " && pause" + " && exit\"");
-
+				return "Git Push Success!";
 			} catch (IOException e) {
 				System.out.println(e.toString());
+				return e.toString();
 			}
 		} else if (os.contains("Mac")) {
 			System.out.println(os);
@@ -43,11 +44,16 @@ public class GitHubHelper {
 				String command = " cd " + projectPath 
 				+ " && git add . && git commit -m \"testing auto commit\" && git push";
 
-				excecuteMacCommand(command);
+				return excecuteMacCommand(command);
 			}
 			catch (Exception e) {
-				System.out.println("Caught exception");
+				System.out.println(e.toString());
+				return e.toString();
 			}
+		}
+		else
+		{
+			return "Your current OS is not supported";
 		}
 	}
 
@@ -60,16 +66,35 @@ public class GitHubHelper {
 	 * Red is what is currently in the repository Green is any differences the user
 	 * has compared to the repository
 	 */
-	public void githubDiff() {
+	public String githubDiff() {
 		if (os.contains("Win")) {
 			// TODO: not focus on the terminal
 			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git diff"
 						+ " && pause" + " && exit\"");
+				return "GitHub Diff Success";
 
 			} catch (IOException e) {
 				System.out.println(e.toString());
+				return e.toString();
 			}
+		}
+		else if (os.contains("Mac")) {
+			System.out.println(os);
+			try {
+
+				String command = " cd " + projectPath + " && git diff";
+				return excecuteMacCommand(command);
+			}
+			catch (Exception e) {
+				System.out.println(e.toString());
+				return e.toString();
+			}
+
+		}
+		else
+		{
+			return "Your current OS is not supported";
 		}
 	}
 
@@ -77,14 +102,16 @@ public class GitHubHelper {
 	 * This method will pull the latest version of code in the repo and overwrite
 	 * the local code with this copy
 	 */
-	public void githubPull() {
+	public String githubPull() {
 		if (os.contains("Win")) {
 			// TODO: not focus on the terminal
 			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git pull"
 						+ " && pause" + " && exit\"");
+				return "Git Pull Success!";
 			} catch (IOException e) {
 				e.printStackTrace();
+				return e.toString();
 			}
 		}
 		else if (os.contains("Mac")) {
@@ -92,19 +119,24 @@ public class GitHubHelper {
 			try {
 
 				String command = " cd " + projectPath + " && git pull";
-				excecuteMacCommand(command);
+				return excecuteMacCommand(command);
 			}
 			catch (Exception e) {
-				System.out.println("Caught exception");
+				System.out.println(e.toString());
+				return e.toString();
 			}
 
+		}
+		else
+		{
+			return "Your current OS is not supported";
 		}
 	}
 /**
  * This method takes a command and executes it for a Mac Terminal.
  * @param command - Must be properly formatted with the syntax for a Mac command
  */
-	public void excecuteMacCommand(String command) {
+	public String excecuteMacCommand(String command) {
 		try {
 		String[] cmd = { "bash", "-c", command };
 		Process p = Runtime.getRuntime().exec(cmd);
@@ -115,18 +147,22 @@ public class GitHubHelper {
 			String result = new BufferedReader(new InputStreamReader(p.getErrorStream())).lines()
 					.collect(Collectors.joining("\n"));
 			System.out.println(result);
+			return result;
 		} else {
 
 			String result = new BufferedReader(new InputStreamReader(p.getInputStream())).lines()
 					.collect(Collectors.joining("\n"));
 			System.out.println(result);
+			return result;
 		}
 		}
 		catch (IOException e) {
 			System.out.println(e.toString());
+			return e.toString();
 		}
 		catch(Exception e) {
-			System.out.println("Caught exception");
+			System.out.println(e.toString());
+			return e.toString();
 		}
 	}
 }
