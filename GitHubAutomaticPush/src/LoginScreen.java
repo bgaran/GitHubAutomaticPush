@@ -39,8 +39,6 @@ public class LoginScreen extends JPanel{
 	private GridBagLayout gbl;
 	
 	private GridBagConstraints gbc;
-	
-	private int i=1;
 
 	public LoginScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
