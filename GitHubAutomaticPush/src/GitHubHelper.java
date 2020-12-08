@@ -25,7 +25,7 @@ public class GitHubHelper {
 	 * connected GitHub repository
 	 */
 	public String githubPush() {
-		if (os.contains("Win")) {
+		if (os.toLowerCase().contains("win")) {
 			// TODO: not focus on the terminal
 			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\""
@@ -38,7 +38,7 @@ public class GitHubHelper {
 				System.out.println(e.toString());
 				return e.toString();
 			}
-		} else if (os.contains("Mac")) {
+		} else if (os.toLowerCase().contains("mac")) {
 			System.out.println(os);
 			try {
 				String command = " cd " + projectPath 
@@ -67,7 +67,7 @@ public class GitHubHelper {
 	 * has compared to the repository
 	 */
 	public String githubDiff() {
-		if (os.contains("Win")) {
+		if (os.toLowerCase().contains("win")) {
 			// TODO: not focus on the terminal
 			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git diff"
@@ -79,7 +79,7 @@ public class GitHubHelper {
 				return e.toString();
 			}
 		}
-		else if (os.contains("Mac")) {
+		else if (os.toLowerCase().contains("mac")) {
 			System.out.println(os);
 			try {
 
@@ -103,7 +103,7 @@ public class GitHubHelper {
 	 * the local code with this copy
 	 */
 	public String githubPull() {
-		if (os.contains("Win")) {
+		if (os.toLowerCase().contains("win")) {
 			// TODO: not focus on the terminal
 			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git pull"
@@ -114,7 +114,7 @@ public class GitHubHelper {
 				return e.toString();
 			}
 		}
-		else if (os.contains("Mac")) {
+		else if (os.toLowerCase().contains("mac")) {
 			System.out.println(os);
 			try {
 
