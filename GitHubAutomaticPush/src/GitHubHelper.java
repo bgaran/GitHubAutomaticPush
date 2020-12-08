@@ -23,6 +23,8 @@ public class GitHubHelper {
 	/**
 	 * This method saves the current progress and pushes the current project to the
 	 * connected GitHub repository
+	 * @author Courtney Crawford
+	 * @author Breanna Garan
 	 */
 	public String githubPush() {
 		if (os.toLowerCase().contains("win")) {
@@ -65,6 +67,8 @@ public class GitHubHelper {
 	 * 
 	 * Red is what is currently in the repository Green is any differences the user
 	 * has compared to the repository
+	 * @author Courtney Crawford
+	 * @author Breanna Garan
 	 */
 	public String githubDiff() {
 		if (os.toLowerCase().contains("win")) {
@@ -101,6 +105,8 @@ public class GitHubHelper {
 	/**
 	 * This method will pull the latest version of code in the repo and overwrite
 	 * the local code with this copy
+	 * @author Courtney Crawford
+	 * @author Breanna Garan
 	 */
 	public String githubPull() {
 		if (os.toLowerCase().contains("win")) {
@@ -132,9 +138,51 @@ public class GitHubHelper {
 			return "Your current OS is not supported";
 		}
 	}
+	
+	/**
+	 * This method will clone the given git repository to the given local file path.
+	 * You must then add that file from your local computer to the package explorer.
+	 * This will set up the repository for use with this application.
+	 * @author Breanna Garan
+	 */
+	public String gitClone(String destPath, String gitURL) {
+		if (os.toLowerCase().contains("win")) {
+			// TODO: not focus on the terminal
+			try {
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + destPath + "\"" + "\" && git clone "+gitURL
+						+ " && pause" + " && exit\"");
+				return "Git Clone Success!";
+			} catch (IOException e) {
+				e.printStackTrace();
+				return e.toString();
+			}
+		}
+		else if (os.toLowerCase().contains("mac")) {
+			System.out.println(os);
+			try {
+
+				String command = " cd " + destPath + " && git clone "+gitURL;
+				return excecuteMacCommand(command);
+			}
+			catch (Exception e) {
+				System.out.println(e.toString());
+				return e.toString();
+			}
+
+		}
+		else
+		{
+			return "Your current OS is not supported";
+		}
+	}
+	
+	
+	
+	
 /**
  * This method takes a command and executes it for a Mac Terminal.
  * @param command - Must be properly formatted with the syntax for a Mac command
+ * @author Breanna Garan
  */
 	public String excecuteMacCommand(String command) {
 		try {
