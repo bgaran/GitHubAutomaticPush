@@ -31,15 +31,15 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private JCheckBox darkModeCheckBox; //used to switch between dark mode and light mode
 		
-	private JButton pushButton, diffButton, backButton; //TODO: implement backButton
+	private JButton pullButton, diffButton, backButton;
 	
-	private JToggleButton pullToggleButton;
+	private JToggleButton pushToggleButton;
 	
-	private Font bigWords; //used to resize the text
+	private Font bigWords, mediumWords; //used to resize the text
 	
-	private TimerTask pullTask;
+	private TimerTask pushTask;
 	
-	private Timer pullTimer;
+	private Timer pushTimer;
 
 	public GitCommandCenterScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
@@ -53,15 +53,15 @@ public class GitCommandCenterScreen extends JPanel{
 		this.frameManager = frameManager;
 		
 		//initialize all UI elements
-		infoLabel = new JLabel("Perform git commands using the buttons.");
+		infoLabel = new JLabel("Perform git commands.");
 		spacingLabel1 = new JLabel("");
 		spacingLabel2 = new JLabel("");
 		spacingLabel3 = new JLabel("");
 		spacingLabel4 = new JLabel("");
 		feedbackLabel = new JLabel("feedback");
 		
-		pushButton = new JButton("Push");
-		pullToggleButton = new JToggleButton("Pull");
+		pushToggleButton = new JToggleButton("Push");
+		pullButton = new JButton("Pull");
 		diffButton = new JButton("Diff");
 		backButton = new JButton("Back");
 
@@ -69,16 +69,16 @@ public class GitCommandCenterScreen extends JPanel{
 		darkModeCheckBox = new JCheckBox("Dark Mode");
 		
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
-		
+		mediumWords = new Font("Sans Serif", Font.PLAIN, width/40);
 		//set all UI elements to share this same font
-		infoLabel.setFont(bigWords);
+		infoLabel.setFont(mediumWords);
 		feedbackLabel.setFont(bigWords);
 		darkModeCheckBox.setFont(bigWords);
 		darkModeCheckBox.setBackground(Color.white);
-		pushButton.setFont(bigWords);
-		pushButton.setBackground(new Color(255, 110, 99));
-		pullToggleButton.setFont(bigWords);
-		pullToggleButton.setBackground(new Color(127, 245, 125));
+		pushToggleButton.setFont(bigWords);
+		pushToggleButton.setBackground(new Color(255, 110, 99));
+		pullButton.setFont(bigWords);
+		pullButton.setBackground(new Color(127, 245, 125));
 		diffButton.setFont(bigWords);
 		diffButton.setBackground(new Color(109, 162, 247));
 		backButton.setFont(bigWords);
@@ -98,43 +98,27 @@ public class GitCommandCenterScreen extends JPanel{
 		this.add(backButton);
 		this.add(feedbackLabel);
 		this.add(spacingLabel4);
-		this.add(pushButton);
-		this.add(pullToggleButton);
+		this.add(pushToggleButton);
+		this.add(pullButton);
 		this.add(diffButton);
 		
 		//Button actions when clicked
-		pushButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if(pullToggleButton.getText().toLowerCase().equals("pulling...")) {
-					JOptionPane.showMessageDialog(null,
-						    "You are currently pulling. Please cancel pulling to push.",
-						    "Warning",
-						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
-				}else {
-					frameManager.git.githubPush();
-				}
-			}
-			
-		});
-		
-		pullToggleButton.addItemListener(new ItemListener() {
+		pushToggleButton.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				int state = e.getStateChange();
 				
                 if (state == ItemEvent.SELECTED) {
-                	//activate pulling
-                	pullToggleButton.setText("Pulling...");
+                	//activate pushing
+                	pushToggleButton.setText("Pushing...");
                 	resumeTimer();
                     
                 } 
                 else {  
-                	//deactivate pulling
-                	pullToggleButton.setText("Pull");
-                	pullToggleButton.setBackground(new Color(127, 245, 125));
+                	//deactivate pushing
+                	pushToggleButton.setText("Push");
+                	pushToggleButton.setBackground(new Color(255, 110, 99));
                 	pauseTimer();
 
 
@@ -143,13 +127,29 @@ public class GitCommandCenterScreen extends JPanel{
 			
 		});
 		
+		pullButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(pushToggleButton.getText().toLowerCase().equals("pushing...")) {
+					JOptionPane.showMessageDialog(null,
+						    "You are currently pushing. Please cancel pushing to pull.",
+						    "Warning",
+						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
+				}else {
+					frameManager.git.githubPull();
+				}
+			}
+			
+		});
+		
 		diffButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(pullToggleButton.getText().toLowerCase().equals("pulling...")) {
+				if(pushToggleButton.getText().toLowerCase().equals("pushing...")) {
 					JOptionPane.showMessageDialog(null,
-						    "You are currently pulling. Please cancel pulling to perform diff.",
+						    "You are currently pushing. Please cancel pushing to perform diff.",
 						    "Warning",
 						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
 				}else {
@@ -163,9 +163,9 @@ public class GitCommandCenterScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(pullToggleButton.getText().toLowerCase().equals("pulling...")) {
+				if(pushToggleButton.getText().toLowerCase().equals("pushing...")) {
 					JOptionPane.showMessageDialog(null,
-						    "You are currently pulling. Please cancel pulling to return to the file path screen.",
+						    "You are currently pushing. Please cancel pushing to perform diff.",
 						    "Warning",
 						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
 				}else {
@@ -189,8 +189,8 @@ public class GitCommandCenterScreen extends JPanel{
                     darkModeCheckBox.setBackground(Color.DARK_GRAY);
                     darkModeCheckBox.setForeground(Color.white);
                     feedbackLabel.setForeground(Color.white);
-                    pushButton.setForeground(Color.white);
-                    pullToggleButton.setForeground(Color.white);
+                    pushToggleButton.setForeground(Color.white);
+                    pullButton.setForeground(Color.white);
                     diffButton.setForeground(Color.white);
                 } 
                 else {  
@@ -200,8 +200,8 @@ public class GitCommandCenterScreen extends JPanel{
                     darkModeCheckBox.setBackground(Color.white);
                     darkModeCheckBox.setForeground(Color.black);
                     feedbackLabel.setForeground(Color.black);
-                    pushButton.setForeground(Color.black);
-                    pullToggleButton.setForeground(Color.black);
+                    pushToggleButton.setForeground(Color.black);
+                    pullButton.setForeground(Color.black);
                     diffButton.setForeground(Color.black);
                     backButton.setForeground(Color.black);
                 }
@@ -212,29 +212,29 @@ public class GitCommandCenterScreen extends JPanel{
 	}
 	
 	/**
-	 * Cancels or stops the existing pullTimer and pullTask. Once canceled, a new Timer and TimerTask must be created with method resumeTimer().
+	 * Cancels or stops the existing pshTimer and pushTask. Once canceled, a new Timer and TimerTask must be created with method resumeTimer().
 	 * @author April
 	 */
 	private void pauseTimer() {
-		this.pullTimer.cancel();
-		this.pullTask.cancel();
+		this.pushTimer.cancel();
+		this.pushTask.cancel();
 	}
 	
 	/**
-	 * Resumes the pullTimer and pullTask by creating new instances of each. The pullTask will call framemanager.git.githubPull
-	 * and the pullTimer will perform that task every 30 seconds.
+	 * Resumes the pushTimer and pushTask by creating new instances of each. The pushTask will call framemanager.git.githubPush
+	 * and the pshTimer will perform that task every 30 seconds.
 	 * @author April
 	 */
 	private void resumeTimer() {
-    	this.pullTask = new TimerTask() {
+    	this.pushTask = new TimerTask() {
 
     	    @Override
     	    public void run() {
-    	    	frameManager.git.githubPull();
+    	    	frameManager.git.githubPush();
     	    }
     	};
-	    this.pullTimer = new Timer();
-	    this.pullTimer.schedule(pullTask, new Date(), 30000); //pull every 30 seconds (30000 milliseconds)
+	    this.pushTimer = new Timer();
+	    this.pushTimer.schedule(pushTask, new Date(), 3000); //pull every 30 seconds (30000 milliseconds)
 	}
 }
 
