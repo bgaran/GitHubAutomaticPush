@@ -53,7 +53,7 @@ public class SetupScreen extends JPanel{
 		infoLabel = new JLabel("Please input your file path to current project src folder.");
 		filePathLabel = new JLabel("File path:");
 		feedbackLabel = new JLabel("");
-		a
+
 		filePathTextField = new JTextField("ex. H:\\workspace\\CS128 HW1\\src\\");
 		
 		submitButton = new JButton("Submit");
