@@ -15,6 +15,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 //import 
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -59,6 +60,7 @@ public class SetupScreen extends JPanel{
 		
 		submitButton = new JButton("Submit");
 		browseButton = new JButton("Browse...");
+		backButton = new JButton("Back");
 		
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
@@ -88,6 +90,7 @@ public class SetupScreen extends JPanel{
 		feedbackLabel.setFont(bigWords);
 		filePathTextField.setFont(bigWords);
 		submitButton.setFont(bigWords);
+		backButton.setFont(bigWords);
 		browseButton.setFont(bigWords);
 		windowsButton.setFont(mediumWords);
 		macButton.setFont(mediumWords);
@@ -102,6 +105,7 @@ public class SetupScreen extends JPanel{
 		browseButton.setPreferredSize(new Dimension(width/6,height/8));
 		filePathTextField.setPreferredSize(new Dimension(width/2,height/8)); 
 		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
+		backButton.setPreferredSize(new Dimension(width/2,height/8)); 
 		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
 		windowsButton.setPreferredSize(new Dimension(width/8,height/10));
 		macButton.setPreferredSize(new Dimension(width/8,height/10));
@@ -116,6 +120,7 @@ public class SetupScreen extends JPanel{
 		this.add(browseButton);
 		this.add(filePathTextField);
 		this.add(submitButton);
+		this.add(backButton);
 		this.add(windowsButton);
 		this.add(macButton);
 		this.add(feedbackLabel);
@@ -153,6 +158,15 @@ public class SetupScreen extends JPanel{
 					feedbackLabel.setText("Please select your src folder.");
 					//TODO check for whether or not the file path ends in /src/, if not, warn the user.
 				}
+			}
+			
+		});
+		
+		backButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {	
+					frameManager.swapPanel("login");
 			}
 			
 		});
@@ -232,10 +246,10 @@ public class SetupScreen extends JPanel{
 			
 		});
 		
-		//Detect the user's OS and selects the respective radio button
-		if(System.getProperty("os.name").contains("Windows") || System.getProperty("os.name").contains("windows")) {
+		//Detects the user's OS and selects the respective radio button
+		if(System.getProperty("os.name").toLowerCase().contains("windows")) {
 			windowsButton.setSelected(true);
-		} else if (System.getProperty("os.name").contains("Mac") || System.getProperty("os.name").contains("mac")) {
+		} else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
 			macButton.setSelected(true);
 		}
 				

@@ -52,7 +52,7 @@ public class LoginScreen extends JPanel{
 		usernameTextField = new JTextField("Username...");
 		passwordTextField = new JTextField("Password...");
 		
-		submitButton = new JButton("submit");
+		submitButton = new JButton("Submit");
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
