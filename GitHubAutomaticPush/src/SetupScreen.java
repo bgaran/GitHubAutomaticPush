@@ -33,8 +33,6 @@ public class SetupScreen extends JPanel{
 	private JFileChooser fileChooser;
 	
 	private String filePath;
-	
-	private JRadioButton windowsButton, macButton;
 		
 	private JButton submitButton, browseButton, backButton; //TODO: implement backButton
 	
@@ -64,13 +62,6 @@ public class SetupScreen extends JPanel{
 		
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
-		//radio buttons and their group
-		windowsButton = new JRadioButton("Windows");
-		macButton = new JRadioButton("Mac");
-		ButtonGroup group = new ButtonGroup();
-		group.add(windowsButton);
-		group.add(macButton);
-		
 		//initialize file chooser
 		fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File("."));
@@ -92,8 +83,6 @@ public class SetupScreen extends JPanel{
 		submitButton.setFont(bigWords);
 		backButton.setFont(bigWords);
 		browseButton.setFont(bigWords);
-		windowsButton.setFont(mediumWords);
-		macButton.setFont(mediumWords);
 		darkModeToggleButton.setFont(bigWords);
 		
 		//initialize color of text fields to default, change color once focus gained
@@ -107,8 +96,6 @@ public class SetupScreen extends JPanel{
 		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
 		backButton.setPreferredSize(new Dimension(width/2,height/8)); 
 		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
-		windowsButton.setPreferredSize(new Dimension(width/8,height/10));
-		macButton.setPreferredSize(new Dimension(width/8,height/10));
 		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
 
 		//align all UI elements correctly
@@ -121,8 +108,6 @@ public class SetupScreen extends JPanel{
 		this.add(filePathTextField);
 		this.add(submitButton);
 		this.add(backButton);
-		this.add(windowsButton);
-		this.add(macButton);
 		this.add(feedbackLabel);
 		this.add(darkModeToggleButton);
 		
@@ -192,26 +177,6 @@ public class SetupScreen extends JPanel{
 			
 		});
 		
-		//If Windows radio button is selected
-		windowsButton.addActionListener(new ActionListener() {
-			@Override 
-			public void actionPerformed(ActionEvent e){
-				if(e.getSource()==windowsButton) {
-					//TODO
-				}
-			}
-		});
-		
-		//If Mac radio button is selected
-		macButton.addActionListener(new ActionListener() {
-			@Override 
-			public void actionPerformed(ActionEvent e){
-				if(e.getSource()==macButton) {
-					//TODO
-				}
-			}
-		});
-		
 		//When darkModeToggleButton is toggled
 		darkModeToggleButton.addItemListener(new ItemListener() {
 
@@ -224,10 +189,6 @@ public class SetupScreen extends JPanel{
                     setBackground(Color.DARK_GRAY);
                     infoLabel.setForeground(Color.white);
                     filePathLabel.setForeground(Color.white);
-                    windowsButton.setBackground(Color.DARK_GRAY);
-                    windowsButton.setForeground(Color.white);
-                    macButton.setBackground(Color.DARK_GRAY);
-                    macButton.setForeground(Color.white);
                     feedbackLabel.setForeground(Color.white);
                     
                 } 
@@ -236,22 +197,10 @@ public class SetupScreen extends JPanel{
                     setBackground(bgColor);
                     infoLabel.setForeground(Color.black);
                     filePathLabel.setForeground(Color.black);
-                    windowsButton.setBackground(Color.white);
-                    windowsButton.setForeground(Color.black);
-                    macButton.setBackground(Color.white);
-                    macButton.setForeground(Color.black);
                     feedbackLabel.setForeground(Color.black);
                 }
 			}
 			
-		});
-		
-		//Detects the user's OS and selects the respective radio button
-		if(System.getProperty("os.name").toLowerCase().contains("windows")) {
-			windowsButton.setSelected(true);
-		} else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-			macButton.setSelected(true);
-		}
-				
+		});				
 	}
 }
