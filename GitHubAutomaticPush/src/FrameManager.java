@@ -32,6 +32,12 @@ public class FrameManager {
 	
 	public GitHubHelper git; //made public because it is not instantiated
 	
+	enum swappablePanel{ //for swapPanel() method
+		LOGIN,
+		SETUP,
+		CENTER
+	};
+	
 	/**
 	 * Does things that would otherwise be in the main method, needed so that the driver can feed itself into the panels so that swapping can occur.
 	 */
@@ -57,19 +63,15 @@ public class FrameManager {
 	 * swaps the current panel to one specified. If none are specified, prints an error to tell the developer to use a valid name.
 	 * @param panelName - simply the name of the class you wish to set 
 	 */
-	public void swapPanel(String panelName) {
-		panelName = panelName.toLowerCase();
-		if(panelName.equals("login")) {
+	public void swapPanel(swappablePanel panelName) {
+		if(panelName == swappablePanel.LOGIN) {
 			swapPanel(login);
 		}
-		else if(panelName.equals("setup")) {
+		else if(panelName == swappablePanel.SETUP) {
 			swapPanel(setup);
 		}
-		else if (panelName.equals("center")){
+		else if (panelName == swappablePanel.CENTER) {
 			swapPanel(center);
-		}
-		else {
-			System.err.println("Please use a valid name to swap to.");
 		}
 	}
 	

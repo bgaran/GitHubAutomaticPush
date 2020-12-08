@@ -138,7 +138,7 @@ public class SetupScreen extends JPanel{
 				feedbackLabel.setText("success");
 				//if feedbackLabel 
 				if(feedbackLabel.getText().equals("success")) {
-					frameManager.swapPanel("center");
+					frameManager.swapPanel(FrameManager.swappablePanel.CENTER);
 				}
 			}
 			
@@ -166,7 +166,7 @@ public class SetupScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {	
-					frameManager.swapPanel("login");
+					frameManager.swapPanel(FrameManager.swappablePanel.LOGIN);
 			}
 			
 		});

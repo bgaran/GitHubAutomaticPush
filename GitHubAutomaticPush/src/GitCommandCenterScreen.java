@@ -169,7 +169,7 @@ public class GitCommandCenterScreen extends JPanel{
 						    "Warning",
 						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
 				}else {
-					frameManager.swapPanel("setup");
+					frameManager.swapPanel(FrameManager.swappablePanel.SETUP);
 				}
 			}
 			

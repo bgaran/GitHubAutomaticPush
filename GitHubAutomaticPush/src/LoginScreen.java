@@ -104,7 +104,7 @@ public class LoginScreen extends JPanel{
 				feedbackLabel.setText("success");
 				//if feedbackLabel 
 				if(feedbackLabel.getText().equals("success")) {
-					frameManager.swapPanel("setup");
+					frameManager.swapPanel(FrameManager.swappablePanel.SETUP);
 				}
 			}
 			
