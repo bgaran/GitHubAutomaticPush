@@ -36,9 +36,9 @@ public class LoginScreen extends JPanel{
 	
 	public String username, password;
 	
-	private GridBagLayout gbl;
+	private GridBagLayout gbl; //layout
 	
-	private GridBagConstraints gbc;
+	private GridBagConstraints gbc; //constraints for individual components for gbl
 	
 	private int i=1;
 
