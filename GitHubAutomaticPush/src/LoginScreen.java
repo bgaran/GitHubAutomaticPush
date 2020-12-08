@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -33,6 +35,10 @@ public class LoginScreen extends JPanel{
 	private Font bigWords; //used to resize the text
 	
 	public String username, password;
+	
+	private GridBagLayout gbl;
+	
+	private GridBagConstraints gbc;
 
 	public LoginScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
@@ -42,6 +48,12 @@ public class LoginScreen extends JPanel{
 		this.setFocusTraversalKeysEnabled(false);
 		
 		this.frameManager = frameManager;
+		
+		gbl = new GridBagLayout();
+		
+		gbc = new GridBagConstraints();
+		
+		this.setLayout(gbl);
 		
 		//initialize all UI elements
 		infoLabel = new JLabel("Please input your github credentials below.");
@@ -71,26 +83,67 @@ public class LoginScreen extends JPanel{
 		usernameTextField.setForeground(Color.gray);
 		passwordTextField.setForeground(Color.gray);
 		
-		//position all UI elements correctly
-		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width-1 is a janky way of ensuring it's on its own line
-		usernameLabel.setPreferredSize(new Dimension(width/4,height/8)); 
-		usernameTextField.setPreferredSize(new Dimension(width/2,height/8)); 
-		passwordLabel.setPreferredSize(new Dimension(width/4,height/8)); 
-		passwordTextField.setPreferredSize(new Dimension(width/2,height/8)); 
-		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
-		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
-		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
+//		//position all UI elements correctly
+//		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width-1 is a janky way of ensuring it's on its own line
+//		usernameLabel.setPreferredSize(new Dimension(width/4,height/8)); 
+//		usernameTextField.setPreferredSize(new Dimension(width/2,height/8)); 
+//		passwordLabel.setPreferredSize(new Dimension(width/4,height/8)); 
+//		passwordTextField.setPreferredSize(new Dimension(width/2,height/8)); 
+//		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
+//		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
+//		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
 
 		
 		//finally, add all UI elements to the LogInScreen
-		this.add(infoLabel);
-		this.add(usernameLabel);
-		this.add(usernameTextField);
-		this.add(passwordLabel);
-		this.add(passwordTextField);
-		this.add(submitButton);
-		this.add(feedbackLabel);
-		this.add(darkModeToggleButton);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 2;
+		this.add(infoLabel, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.weighty = .33;
+		this.add(usernameLabel, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.weighty = .66;
+		this.add(usernameTextField, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.weighty = .66;
+		this.add(passwordLabel, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		gbc.weighty = .33;
+		this.add(passwordTextField, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		gbc.weightx = 0;
+		gbc.gridwidth = 2;
+		this.add(submitButton, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 2;
+		this.add(feedbackLabel, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.gridwidth = 2;
+		this.add(darkModeToggleButton, gbc);
 		
 		
 		submitButton.addActionListener(new ActionListener() {
