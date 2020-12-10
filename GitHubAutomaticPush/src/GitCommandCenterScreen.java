@@ -241,17 +241,10 @@ public class GitCommandCenterScreen extends JPanel{
 		if(isDarkMode) {
 			//switch ON dark mode
 			setBackground(Color.DARK_GRAY);
-            infoLabel.setForeground(Color.white);
-            pullButton.setForeground(Color.white);
-            diffButton.setForeground(Color.white);
 		}
 		else {
 			//switch OFF dark mode
 			setBackground(Color.WHITE);
-            infoLabel.setForeground(Color.black);
-            pullButton.setForeground(Color.black);
-            diffButton.setForeground(Color.black);
-            backButton.setForeground(Color.black);
 		}
 	}
 	
