@@ -3,6 +3,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -39,6 +41,10 @@ public class SetupScreen extends JPanel{
 	private JToggleButton darkModeToggleButton; //used to toggle between dark mode and light mode
 	
 	private Font bigWords, mediumWords; //used to resize the text
+	
+	private GridBagLayout gbl; //layout
+	
+	private GridBagConstraints gbc; //constraints for individual components for gbl
 
 	public SetupScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
@@ -48,6 +54,12 @@ public class SetupScreen extends JPanel{
 		this.setFocusTraversalKeysEnabled(false);
 		
 		this.frameManager = frameManager;
+		
+		gbl = new GridBagLayout();
+		
+		gbc = new GridBagConstraints();
+		
+		this.setLayout(gbl);
 		
 		//initialize all UI elements
 		infoLabel = new JLabel("Please input your file path to current project src folder.");
@@ -87,28 +99,33 @@ public class SetupScreen extends JPanel{
 		
 		//initialize color of text fields to default, change color once focus gained
 		filePathTextField.setForeground(Color.gray);
-		
-		//position all UI elements correctly
-		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width-1 is a janky way of ensuring it's on its own line
-		filePathLabel.setPreferredSize(new Dimension(width/6,height/8));
-		browseButton.setPreferredSize(new Dimension(width/6,height/8));
-		filePathTextField.setPreferredSize(new Dimension(width/2,height/8)); 
-		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
-		backButton.setPreferredSize(new Dimension(width/2,height/8)); 
-		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
-		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
 
 		//align all UI elements correctly
 	    infoLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		//finally, add all UI elements to the SetupScreen
+	    gbc.fill = GridBagConstraints.BOTH;
 		this.add(infoLabel);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(filePathLabel);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(browseButton);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(filePathTextField);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(submitButton);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(backButton);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(feedbackLabel);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(darkModeToggleButton);
 		
 		submitButton.addActionListener(new ActionListener() {
