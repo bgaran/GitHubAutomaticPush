@@ -40,7 +40,8 @@ public class GitHubHelper {
 				System.out.println(e.toString());
 				return e.toString();
 			}
-		} else if (os.toLowerCase().contains("mac")) {
+		}
+		else{
 			System.out.println(os);
 			try {
 				String command = " cd " + projectPath 
@@ -53,10 +54,10 @@ public class GitHubHelper {
 				return e.toString();
 			}
 		}
-		else
-		{
-			return "Your current OS is not supported";
-		}
+//		else
+//		{
+//			return "Your current OS is not supported";
+//		}
 	}
 
 	/***
@@ -67,6 +68,7 @@ public class GitHubHelper {
 	 * 
 	 * Red is what is currently in the repository Green is any differences the user
 	 * has compared to the repository
+	 * 
 	 * @author Courtney Crawford
 	 * @author Breanna Garan
 	 */
@@ -82,24 +84,22 @@ public class GitHubHelper {
 				System.out.println(e.toString());
 				return e.toString();
 			}
-		}
-		else if (os.toLowerCase().contains("mac")) {
+		} else {
 			System.out.println(os);
 			try {
 
 				String command = " cd " + projectPath + " && git diff";
 				return excecuteMacCommand(command);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println(e.toString());
 				return e.toString();
 			}
 
 		}
-		else
-		{
-			return "Your current OS is not supported";
-		}
+//		else
+//		{
+//			return "Your current OS is not supported";
+//		}
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class GitHubHelper {
 				return e.toString();
 			}
 		}
-		else if (os.toLowerCase().contains("mac")) {
+		else{
 			System.out.println(os);
 			try {
 
@@ -133,10 +133,10 @@ public class GitHubHelper {
 			}
 
 		}
-		else
-		{
-			return "Your current OS is not supported";
-		}
+//		else
+//		{
+//			return "Your current OS is not supported";
+//		}
 	}
 	
 	/**
@@ -157,7 +157,7 @@ public class GitHubHelper {
 				return e.toString();
 			}
 		}
-		else if (os.toLowerCase().contains("mac")) {
+		else {
 			System.out.println(os);
 			try {
 
@@ -170,10 +170,10 @@ public class GitHubHelper {
 			}
 
 		}
-		else
-		{
-			return "Your current OS is not supported";
-		}
+//		else os.toLowerCase().contains("mac")
+//		{
+//			return "Your current OS is not supported";
+//		}
 	}
 	
 	
@@ -181,7 +181,8 @@ public class GitHubHelper {
 	
 /**
  * This method takes a command and executes it for a Mac Terminal.
- * @param command - Must be properly formatted with the syntax for a Mac command
+ * @param command - String terminal command with Mac syntax.
+ * e.g. "cd filePath && git pull"
  * @author Breanna Garan
  */
 	public String excecuteMacCommand(String command) {
