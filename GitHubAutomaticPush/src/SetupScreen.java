@@ -3,6 +3,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -105,28 +107,55 @@ public class SetupScreen extends JPanel{
 		
 		//finally, add all UI elements to the SetupScreen
 	    gbc.fill = GridBagConstraints.BOTH;
-		this.add(infoLabel);
+		gbc.gridx = 0; //center
+		gbc.gridy = 0;
+		gbc.gridwidth = 3;
+		gbc.weighty = .25;
+		this.add(infoLabel, gbc);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(filePathLabel);
+		gbc.gridx = 0; 
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.weightx = .33;
+		this.add(filePathLabel, gbc);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(browseButton);
+		gbc.gridx = 1; 
+		gbc.gridy = 1;
+		gbc.weightx = .33;
+		this.add(browseButton, gbc);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(filePathTextField);
+		gbc.gridx = 2; 
+		gbc.gridy = 1;
+		gbc.weightx = .9;
+		this.add(filePathTextField, gbc);
+		
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.gridx = 0; 
+		gbc.gridy = 2;
+		gbc.gridwidth = 3;
+		gbc.weightx = .25;
+		this.add(submitButton, gbc);
+		
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.gridx = 0; 
+		gbc.gridy = 3;
+		gbc.gridwidth = 3;
+		this.add(backButton, gbc);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(submitButton);
+		gbc.gridx = 0; 
+		gbc.gridy = 4;
+		gbc.gridwidth = 3;
+		this.add(feedbackLabel, gbc);
 		
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(backButton);
-		
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(feedbackLabel);
-		
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(darkModeToggleButton);
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.gridx = 0; 
+		gbc.gridy = 5;
+		gbc.gridwidth = 3;
+		this.add(darkModeToggleButton, gbc);
 		
 		submitButton.addActionListener(new ActionListener() {
 
@@ -136,10 +165,9 @@ public class SetupScreen extends JPanel{
 				//GHH.ConnectToGitHub(username, password, filePath);
 				frameManager.git.projectPath=filePath;
 				
-				//REPLACE THIS CODE LATER
-				feedbackLabel.setText("success");
+				feedbackLabel.setText("");
 				//if feedbackLabel 
-				if(feedbackLabel.getText().equals("success")) {
+				if(feedbackLabel.getText().equals("")) {
 					frameManager.swapPanel(FrameManager.swappablePanel.CENTER);
 				}
 			}
@@ -201,23 +229,68 @@ public class SetupScreen extends JPanel{
 			public void itemStateChanged(ItemEvent e) {
 				int state = e.getStateChange();
 				
-                if (state == ItemEvent.SELECTED) { 
+				if (state == ItemEvent.SELECTED) { 
                 	//switch ON dark mode
-                    setBackground(Color.DARK_GRAY);
-                    infoLabel.setForeground(Color.white);
-                    filePathLabel.setForeground(Color.white);
-                    feedbackLabel.setForeground(Color.white);
-                    
+                	frameManager.isDarkMode=true;
                 } 
                 else {  
                 	//switch OFF dark mode
-                    setBackground(bgColor);
-                    infoLabel.setForeground(Color.black);
-                    filePathLabel.setForeground(Color.black);
-                    feedbackLabel.setForeground(Color.black);
+                	frameManager.isDarkMode=false;
                 }
+                
+                updateUITheme(frameManager.isDarkMode);
 			}
 			
 		});				
+	}
+	
+	/**
+	 * Updates the aesthetics of the current panel based on whether it is light or dark mode
+	 * NOTE: does not update isDarkMode in frame manager
+	 * @param isDarkMode - if this is set to dark mode or not
+	 * 
+	 * @author Griffin White
+	 * @author April Miller
+	 */
+	public void updateUITheme(boolean isDarkMode) {
+		if(isDarkMode) {
+			//switch ON dark mode
+			setBackground(Color.DARK_GRAY);
+            infoLabel.setForeground(Color.white);
+            filePathLabel.setForeground(Color.white);
+            feedbackLabel.setForeground(Color.white);
+		}
+		else {
+			setBackground(Color.WHITE);
+            infoLabel.setForeground(Color.black);
+            filePathLabel.setForeground(Color.black);
+            feedbackLabel.setForeground(Color.black);
+		}
+	}
+	
+	/**
+	 * Called every time repaint() is called, used to update UI Theme from FrameManager
+	 * 
+	 * (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 * 
+	 * @author Griffin White
+	 */
+	protected void paintComponent(Graphics graphics) {
+		super.paintComponent(graphics);
+		Graphics2D g = (Graphics2D)graphics;
+		
+		//update UI theme when repaint() is called
+		updateUITheme(frameManager.isDarkMode);
+		
+		if(this.frameManager.isDarkMode) { //if it is in dark mode
+			darkModeToggleButton.setSelected(true); //set it so the togglebutton is on
+		}
+		else {
+			darkModeToggleButton.setSelected(false); //set it so the togglebutton is off
+		}
+		
+		//reset feedbackLabel
+		feedbackLabel.setText("");
 	}
 }

@@ -32,6 +32,8 @@ public class FrameManager {
 	
 	public GitHubHelper git; //made public because it is not instantiated
 	
+	public boolean isDarkMode = false; //initialize the program with dark mode deselected
+	
 	enum swappablePanel{ //for swapPanel() method
 		LOGIN,
 		SETUP,
@@ -85,6 +87,9 @@ public class FrameManager {
         container.add(panel);
         container.validate();
         container.repaint();
+        
+        //update UI theme
+        panel.repaint();
 	}
 
 }
