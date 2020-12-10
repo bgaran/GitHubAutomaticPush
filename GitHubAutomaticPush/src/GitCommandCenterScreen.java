@@ -242,9 +242,6 @@ public class GitCommandCenterScreen extends JPanel{
 			//switch ON dark mode
 			setBackground(Color.DARK_GRAY);
             infoLabel.setForeground(Color.white);
-            darkModeToggleButton.setForeground(Color.white);
-            feedbackLabel.setForeground(Color.white);
-            pushToggleButton.setForeground(Color.white);
             pullButton.setForeground(Color.white);
             diffButton.setForeground(Color.white);
 		}
@@ -252,9 +249,6 @@ public class GitCommandCenterScreen extends JPanel{
 			//switch OFF dark mode
 			setBackground(Color.WHITE);
             infoLabel.setForeground(Color.black);
-            darkModeToggleButton.setForeground(Color.black);
-            feedbackLabel.setForeground(Color.black);
-            pushToggleButton.setForeground(Color.black);
             pullButton.setForeground(Color.black);
             diffButton.setForeground(Color.black);
             backButton.setForeground(Color.black);
