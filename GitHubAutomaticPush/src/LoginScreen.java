@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -17,10 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+/**
+ * Login Screen for github access, includes a 
+ * @author Griffin White
+ *
+ */
 public class LoginScreen extends JPanel{
-	
-	String filePath;
-	//GitHub github
 	
 	private FrameManager frameManager; //LINKED TO SWAP PANELS
 	
@@ -83,17 +87,6 @@ public class LoginScreen extends JPanel{
 		//initialize color of text fields to default, change color once focus gained
 		usernameTextField.setForeground(Color.gray);
 		passwordTextField.setForeground(Color.gray);
-		
-//		//position all UI elements correctly
-//		infoLabel.setPreferredSize(new Dimension(width-1,height/4)); //width-1 is a janky way of ensuring it's on its own line
-//		usernameLabel.setPreferredSize(new Dimension(width/4,height/8)); 
-//		usernameTextField.setPreferredSize(new Dimension(width/2,height/8)); 
-//		passwordLabel.setPreferredSize(new Dimension(width/4,height/8)); 
-//		passwordTextField.setPreferredSize(new Dimension(width/2,height/8)); 
-//		submitButton.setPreferredSize(new Dimension(width/2,height/8)); 
-//		feedbackLabel.setPreferredSize(new Dimension(width-1,height/5)); //width-1 is a janky way of ensuring it's on its own line
-//		darkModeToggleButton.setPreferredSize(new Dimension(width/2,height/8)); 
-
 		
 		//finally, add all UI elements to the LogInScreen
 		gbc.fill = GridBagConstraints.BOTH;
@@ -215,24 +208,69 @@ public class LoginScreen extends JPanel{
 				
                 if (state == ItemEvent.SELECTED) { 
                 	//switch ON dark mode
-                    setBackground(Color.DARK_GRAY);
-                    infoLabel.setForeground(Color.white);
-                    usernameLabel.setForeground(Color.white);
-                    passwordLabel.setForeground(Color.white);
-                    feedbackLabel.setForeground(Color.white);
-                    
+                	frameManager.isDarkMode=true;
                 } 
                 else {  
                 	//switch OFF dark mode
-                    setBackground(bgColor);
-                    infoLabel.setForeground(Color.black);
-                    usernameLabel.setForeground(Color.black);
-                    passwordLabel.setForeground(Color.black);
-                    feedbackLabel.setForeground(Color.black);
+                	frameManager.isDarkMode=false;
                 }
+                
+                updateUITheme(frameManager.isDarkMode);
 			}
 			
 		});
 		
+	}
+	
+	/**
+	 * Updates the aesthetics of the current panel based on whether it is light or dark mode
+	 * NOTE: does not update isDarkMode in frame manager
+	 * @param isDarkMode - if this is set to dark mode or not
+	 * 
+	 * @author Griffin White
+	 * @author April Miller
+	 */
+	public void updateUITheme(boolean isDarkMode) {
+		if(isDarkMode) {
+			//switch ON dark mode
+            setBackground(Color.DARK_GRAY);
+            infoLabel.setForeground(Color.white);
+            usernameLabel.setForeground(Color.white);
+            passwordLabel.setForeground(Color.white);
+            feedbackLabel.setForeground(Color.white);
+		}
+		else {
+			setBackground(Color.WHITE);
+            infoLabel.setForeground(Color.black);
+            usernameLabel.setForeground(Color.black);
+            passwordLabel.setForeground(Color.black);
+            feedbackLabel.setForeground(Color.black);
+		}
+	}
+	
+	/**
+	 * Called every time repaint() is called, used to update UI Theme from FrameManager
+	 * 
+	 * (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 * 
+	 * @author Griffin White
+	 */
+	protected void paintComponent(Graphics graphics) {
+		super.paintComponent(graphics);
+		Graphics2D g = (Graphics2D)graphics;
+		
+		//update UI theme when repaint() is called
+		updateUITheme(frameManager.isDarkMode);
+		
+		if(this.frameManager.isDarkMode) { //if it is in dark mode
+			darkModeToggleButton.setSelected(true); //set it so the togglebutton is on
+		}
+		else {
+			darkModeToggleButton.setSelected(false); //set it so the togglebutton is off
+		}
+		
+		//reset feedbackLabel
+		feedbackLabel.setText("");
 	}
 }
