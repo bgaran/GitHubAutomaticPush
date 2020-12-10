@@ -25,39 +25,24 @@ public class GitHubHelper {
 	 * connected GitHub repository
 	 * @author Courtney Crawford
 	 * @author Breanna Garan
+	 * @throws IOException 
 	 */
-	public String githubPush() {
+	public String githubPush() throws IOException {
 		if (os.toLowerCase().contains("win")) {
-			// TODO: not focus on the terminal
-			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\""
 				// may or may not need these; if so, need to be user input
 				// + " && git config --global user.email \"ccrawford21@jcu.edu\""
 				// + " && git config --global user.name \"Courtney\""
 						+ "\" && git add . && git commit -m \"Autocommit\" && git push" + " && pause" + " && exit\"");
 				return "Git Push Success!";
-			} catch (IOException e) {
-				System.out.println(e.toString());
-				return e.toString();
-			}
 		}
 		else{
 			System.out.println(os);
-			try {
 				String command = " cd " + projectPath 
 				+ " && git add . && git commit -m \"testing auto commit\" && git push";
 
 				return excecuteMacCommand(command);
-			}
-			catch (Exception e) {
-				System.out.println(e.toString());
-				return e.toString();
-			}
 		}
-//		else
-//		{
-//			return "Your current OS is not supported";
-//		}
 	}
 
 	/***
@@ -71,35 +56,24 @@ public class GitHubHelper {
 	 * 
 	 * @author Courtney Crawford
 	 * @author Breanna Garan
+	 * @throws IOException 
 	 */
-	public String githubDiff() {
+	public String githubDiff() throws IOException {
 		if (os.toLowerCase().contains("win")) {
-			// TODO: not focus on the terminal
-			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git diff"
 						+ " && pause" + " && exit\"");
 				return "GitHub Diff Success";
 
-			} catch (IOException e) {
-				System.out.println(e.toString());
-				return e.toString();
-			}
 		} else {
 			System.out.println(os);
-			try {
+			
 
 				String command = " cd " + projectPath + " && git diff";
 				return excecuteMacCommand(command);
-			} catch (Exception e) {
-				System.out.println(e.toString());
-				return e.toString();
-			}
+			
 
 		}
-//		else
-//		{
-//			return "Your current OS is not supported";
-//		}
+
 	}
 
 	/**
@@ -107,73 +81,42 @@ public class GitHubHelper {
 	 * the local code with this copy
 	 * @author Courtney Crawford
 	 * @author Breanna Garan
+	 * @throws IOException 
 	 */
-	public String githubPull() {
+	public String githubPull() throws IOException {
 		if (os.toLowerCase().contains("win")) {
-			// TODO: not focus on the terminal
-			try {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git pull"
 						+ " && pause" + " && exit\"");
 				return "Git Pull Success!";
-			} catch (IOException e) {
-				e.printStackTrace();
-				return e.toString();
-			}
 		}
 		else{
-			System.out.println(os);
-			try {
-
 				String command = " cd " + projectPath + " && git pull";
 				return excecuteMacCommand(command);
-			}
-			catch (Exception e) {
-				System.out.println(e.toString());
-				return e.toString();
-			}
-
 		}
-//		else
-//		{
-//			return "Your current OS is not supported";
-//		}
+
 	}
 	
 	/**
 	 * This method will clone the given git repository to the given local file path.
 	 * You must then add that file from your local computer to the package explorer.
 	 * This will set up the repository for use with this application.
+	 * 
 	 * @author Breanna Garan
+	 * @throws IOException
 	 */
-	public String gitClone(String destPath, String gitURL) {
+	public String gitClone(String destPath, String gitURL) throws IOException {
 		if (os.toLowerCase().contains("win")) {
-			// TODO: not focus on the terminal
-			try {
-				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + destPath + "\"" + "\" && git clone "+gitURL
-						+ " && pause" + " && exit\"");
-				return "Git Clone Success!";
-			} catch (IOException e) {
-				e.printStackTrace();
-				return e.toString();
-			}
-		}
-		else {
-			System.out.println(os);
-			try {
+			Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + destPath + "\"" + "\" && git clone " + gitURL
+					+ " && pause" + " && exit\"");
+			return "Git Clone Success!";
 
-				String command = " cd " + destPath + " && git clone "+gitURL;
-				return excecuteMacCommand(command);
-			}
-			catch (Exception e) {
-				System.out.println(e.toString());
-				return e.toString();
-			}
+		} else {
+
+			String command = " cd " + destPath + " && git clone " + gitURL;
+			return excecuteMacCommand(command);
 
 		}
-//		else os.toLowerCase().contains("mac")
-//		{
-//			return "Your current OS is not supported";
-//		}
+
 	}
 	
 	
