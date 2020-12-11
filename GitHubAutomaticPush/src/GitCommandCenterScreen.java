@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +25,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+/**
+ * Assembles a center for users to perform Git commands.
+ * @author April Miller
+ * @author Griffin White
+ *
+ */
 public class GitCommandCenterScreen extends JPanel{
 	
 	String filePath;
@@ -31,9 +39,9 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private JLabel infoLabel, spacingLabel1, spacingLabel2, spacingLabel3, spacingLabel4, feedbackLabel;
 	
-	//private JCheckBox darkModeCheckBox; //used to switch between dark mode and light mode
+	private String feedbackMessage = "";
 		
-	private JButton pullButton, diffButton, backButton;
+	private JButton pullButton, diffButton, cloneButton, backButton;
 	
 	private JToggleButton pushToggleButton, darkModeToggleButton;
 	
@@ -43,6 +51,15 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private Timer pushTimer;
 
+	/**
+	 * Creates a new GitCommandCenterScreen panel which serves as a center for the user to perform Git commands.
+	 * @param width - the width of the panel.
+	 * @param height - the height of the panel.
+	 * @param bgColor - the background color of the panel.
+	 * @param frameManager - the frameManager which the panel will reference in order to swap panels.
+	 * @author April Miller
+	 * @author Griffin White
+	 */
 	public GitCommandCenterScreen(int width, int height, Color bgColor, FrameManager frameManager) {
 		setPreferredSize(new Dimension(width, height));
 		setBackground(bgColor); 
@@ -60,13 +77,13 @@ public class GitCommandCenterScreen extends JPanel{
 		spacingLabel2 = new JLabel("");
 		spacingLabel3 = new JLabel("");
 		spacingLabel4 = new JLabel("");
-		feedbackLabel = new JLabel("feedback");
+		feedbackLabel = new JLabel(feedbackMessage);
 		
 		pushToggleButton = new JToggleButton("Push");
 		pullButton = new JButton("Pull");
 		diffButton = new JButton("Diff");
+		cloneButton = new JButton("Clone");
 		backButton = new JButton("Back");
-
 		
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
@@ -76,7 +93,8 @@ public class GitCommandCenterScreen extends JPanel{
 		
 		bigWords = new Font("Sans Serif", Font.PLAIN, width/30); //Makes it so the text is easily seeable, using one 30th of the window's width for the font size
 		mediumWords = new Font("Sans Serif", Font.PLAIN, width/40);
-		//set all UI elements to share this same font
+		
+		//set font and color of UI elements 
 		infoLabel.setFont(mediumWords);
 		feedbackLabel.setFont(bigWords);
 		darkModeToggleButton.setFont(bigWords);
@@ -86,6 +104,8 @@ public class GitCommandCenterScreen extends JPanel{
 		pullButton.setBackground(new Color(127, 245, 125));
 		diffButton.setFont(bigWords);
 		diffButton.setBackground(new Color(109, 162, 247));
+		cloneButton.setFont(bigWords);
+		cloneButton.setBackground(new Color(186, 137, 245));
 		backButton.setFont(bigWords);
 
 		
@@ -106,10 +126,10 @@ public class GitCommandCenterScreen extends JPanel{
 		this.add(pushToggleButton);
 		this.add(pullButton);
 		this.add(diffButton);
+		this.add(cloneButton);
 		
 		//Button actions when clicked
 		pushToggleButton.addItemListener(new ItemListener() {
-
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				int state = e.getStateChange();
@@ -117,23 +137,19 @@ public class GitCommandCenterScreen extends JPanel{
                 if (state == ItemEvent.SELECTED) {
                 	//activate pushing
                 	pushToggleButton.setText("Pushing...");
-                	resumeTimer();
-                    
+                	resumeTimer();                	
+                	feedbackLabel.setText("Git Push Success!");                    
                 } 
                 else {  
                 	//deactivate pushing
                 	pushToggleButton.setText("Push");
                 	pushToggleButton.setBackground(new Color(255, 110, 99));
-                	pauseTimer();
-
-
+                	cancelTimer();
                 }
-			}
-			
+			}			
 		});
 		
 		pullButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(pushToggleButton.getText().toLowerCase().equals("pushing...")) {
@@ -142,10 +158,14 @@ public class GitCommandCenterScreen extends JPanel{
 						    "Warning",
 						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
 				}else {
-					frameManager.git.githubPull();
+					try {
+						feedbackMessage = frameManager.git.githubPull();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					feedbackLabel.setText(feedbackMessage);
 				}
-			}
-			
+			}			
 		});
 		
 		diffButton.addActionListener(new ActionListener() {
@@ -158,10 +178,42 @@ public class GitCommandCenterScreen extends JPanel{
 						    "Warning",
 						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
 				}else {
-					frameManager.git.githubDiff();
+					try {
+						feedbackMessage = frameManager.git.githubDiff();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					feedbackLabel.setText(feedbackMessage);
 				}
-			}
-			
+			}			
+		});
+		
+		cloneButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(pushToggleButton.getText().toLowerCase().equals("pushing...")) {
+					JOptionPane.showMessageDialog(null,
+						    "You are currently pushing. Please cancel pushing to clone.",
+						    "Warning",
+						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
+				}else {
+		            String URI = (String)JOptionPane.showInputDialog(
+		                    GitCommandCenterScreen.this,
+		                    "Enter the URI of the repository to clone.", 
+		                    "Clone a Repository",            
+		                    JOptionPane.PLAIN_MESSAGE,
+		                    null,            
+		                    null, 
+		                    ""); //display an input box for the user to enter the repository they want to clone
+					try {
+						feedbackMessage = frameManager.git.gitClone(frameManager.git.projectPath, URI);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					feedbackLabel.setText(feedbackMessage);
+				}
+			}			
 		});
 		
 		backButton.addActionListener(new ActionListener() {
@@ -170,17 +222,16 @@ public class GitCommandCenterScreen extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				if(pushToggleButton.getText().toLowerCase().equals("pushing...")) {
 					JOptionPane.showMessageDialog(null,
-						    "You are currently pushing. Please cancel pushing to perform diff.",
+						    "You are currently pushing. Please cancel pushing before you return.",
 						    "Warning",
 						    JOptionPane.WARNING_MESSAGE); //display dialog box with warning
 				}else {
 					frameManager.swapPanel(FrameManager.swappablePanel.SETUP);
 				}
-			}
-			
+			}			
 		});
 		
-		//When darkModeCheckBox is checked/unchecked
+		//When darkModeToggleButton is toggled
 		darkModeToggleButton.addItemListener(new ItemListener() {
 
 			@Override
@@ -197,36 +248,37 @@ public class GitCommandCenterScreen extends JPanel{
                 }
                 
                 updateUITheme(frameManager.isDarkMode);
-			}
-			
-		});
-				
+			}			
+		});				
 	}
 	
 	/**
-	 * Cancels or stops the existing pshTimer and pushTask. Once canceled, a new Timer and TimerTask must be created with method resumeTimer().
+	 * Cancels or stops the existing pushTimer and pushTask. Once canceled, a new Timer and TimerTask must be created with method resumeTimer().
 	 * @author April
 	 */
-	private void pauseTimer() {
+	private void cancelTimer() {
 		this.pushTimer.cancel();
 		this.pushTask.cancel();
 	}
 	
 	/**
-	 * Resumes the pushTimer and pushTask by creating new instances of each. The pushTask will call framemanager.git.githubPush
-	 * and the pshTimer will perform that task every 30 seconds.
-	 * @author April
+	 * Resumes the pushTimer and pushTask by creating new instances of each. The pushTask will call frameManager.git.githubPush
+	 * and the pushTimer will perform that task every 30 seconds.
+	 * @author April Miller
 	 */
 	private void resumeTimer() {
     	this.pushTask = new TimerTask() {
-
     	    @Override
     	    public void run() {
-    	    	frameManager.git.githubPush();
+    	    	try {
+    	    		frameManager.git.githubPush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
     	    }
     	};
 	    this.pushTimer = new Timer();
-	    this.pushTimer.schedule(pushTask, new Date(), 3000); //pull every 30 seconds (30000 milliseconds)
+	    this.pushTimer.schedule(pushTask, new Date(), 30000); //pull every 30 seconds (30000 milliseconds)
 	}
 	
 	/**
@@ -249,6 +301,7 @@ public class GitCommandCenterScreen extends JPanel{
 			setBackground(Color.WHITE);
             infoLabel.setForeground(Color.black);
             feedbackLabel.setForeground(Color.black);
+		}
 	}
 	
 	/**
