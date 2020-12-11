@@ -1,17 +1,18 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 public class GitHubHelper {
-	String os = System.getProperty("os.name");
-	// String repoPath =
-	// "https://github.com/bgaran/SeniorDesignTemplateProject.git"; //if using
-	// existing repo, will need to be user input
+	String os = System.getProperty("os.name").toLowerCase();
 	String projectPath;
 
 	/**
-	 * This method connects to GitHub with the given user name and password
+	 * This method connects to GitHub with the given user name and password.
+	 * 
+	 * Right now it is not used, but may be needed in future development when handing
+	 * user credentials.
 	 * 
 	 * @param username - GitHub User Name (String)
 	 * @param password - GitHub Password (String)
@@ -28,24 +29,24 @@ public class GitHubHelper {
 	 * @throws IOException 
 	 */
 	public String githubPush() throws IOException {
-		if (os.toLowerCase().contains("win")) {
-				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\""
-				// may or may not need these; if so, need to be user input
-				// + " && git config --global user.email \"ccrawford21@jcu.edu\""
-				// + " && git config --global user.name \"Courtney\""
-						+ "\" && git add . && git commit -m \"Autocommit\" && git push" + " && pause" + " && exit\"");
-				return "Git Push Success!";
+		if (os.contains("win")) {
+			
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"cd " + projectPath + "\""
+						+ "\" && git add . && git commit -m \""+LocalDateTime.now()+"\" && git push\"");
+				
+				return "Git Push Success!";	
 		}
 		else{
 			System.out.println(os);
 				String command = " cd " + projectPath 
-				+ " && git add . && git commit -m \"testing auto commit\" && git push";
+				+ " && git add . && git commit -m \""+LocalDateTime.now()+"\" && git push";
 
 				return excecuteMacCommand(command);
 		}
 	}
 
 	/***
+	 * In Windows:
 	 * This method will compare the most recent version of code in the repo with
 	 * what the user has in their local and show it in the command prompt/terminal
 	 * window. From there, the user can identify any differences and manually change
@@ -59,21 +60,17 @@ public class GitHubHelper {
 	 * @throws IOException 
 	 */
 	public String githubDiff() throws IOException {
-		if (os.toLowerCase().contains("win")) {
-				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git diff"
-						+ " && pause" + " && exit\"");
+		if (os.contains("win")) {
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" 
+						+ "\" && git diff" + " && pause" + " && exit\"");
+				
 				return "GitHub Diff Success";
-
 		} else {
-			System.out.println(os);
-			
-
+				System.out.println(os);
+				
 				String command = " cd " + projectPath + " && git diff";
 				return excecuteMacCommand(command);
-			
-
 		}
-
 	}
 
 	/**
@@ -84,16 +81,16 @@ public class GitHubHelper {
 	 * @throws IOException 
 	 */
 	public String githubPull() throws IOException {
-		if (os.toLowerCase().contains("win")) {
-				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" + "\" && git pull"
-						+ " && pause" + " && exit\"");
+		if (os.contains("win")) {
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"cd " + projectPath + "\"" 
+						+ "\" && git pull\"");
+				
 				return "Git Pull Success!";
 		}
 		else{
 				String command = " cd " + projectPath + " && git pull";
 				return excecuteMacCommand(command);
 		}
-
 	}
 	
 	/**
@@ -101,26 +98,21 @@ public class GitHubHelper {
 	 * You must then add that file from your local computer to the package explorer.
 	 * This will set up the repository for use with this application.
 	 * 
+	 * @author Courtney Crawford
 	 * @author Breanna Garan
 	 * @throws IOException
 	 */
 	public String gitClone(String destPath, String gitURL) throws IOException {
-		if (os.toLowerCase().contains("win")) {
-			Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + destPath + "\"" + "\" && git clone " + gitURL
-					+ " && pause" + " && exit\"");
+		if (os.contains("win")) {
+			Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"cd " + destPath + "\"" 
+					+ "\" && git clone " + gitURL + "\"");
+			
 			return "Git Clone Success!";
-
 		} else {
-
 			String command = " cd " + destPath + " && git clone " + gitURL;
 			return excecuteMacCommand(command);
-
 		}
-
 	}
-	
-	
-	
 	
 /**
  * This method takes a command and executes it for a Mac Terminal.
@@ -130,23 +122,22 @@ public class GitHubHelper {
  */
 	public String excecuteMacCommand(String command) {
 		try {
-		String[] cmd = { "bash", "-c", command };
-		Process p = Runtime.getRuntime().exec(cmd);
-		p.waitFor();
-		int status = p.exitValue();
-		System.out.println("Program terminated with exit status " + status);
-		if (status != 0) {
-			String result = new BufferedReader(new InputStreamReader(p.getErrorStream())).lines()
+			String[] cmd = { "bash", "-c", command };
+			Process p = Runtime.getRuntime().exec(cmd);
+			p.waitFor();
+			int status = p.exitValue();
+			System.out.println("Program terminated with exit status " + status);
+			if (status != 0) {
+				String result = new BufferedReader(new InputStreamReader(p.getErrorStream())).lines()
 					.collect(Collectors.joining("\n"));
-			System.out.println(result);
-			return result;
-		} else {
-
-			String result = new BufferedReader(new InputStreamReader(p.getInputStream())).lines()
+				System.out.println(result);
+				return result;
+			} else {
+				String result = new BufferedReader(new InputStreamReader(p.getInputStream())).lines()
 					.collect(Collectors.joining("\n"));
-			System.out.println(result);
-			return result;
-		}
+				System.out.println(result);
+				return result;
+			}
 		}
 		catch (IOException e) {
 			System.out.println(e.toString());
