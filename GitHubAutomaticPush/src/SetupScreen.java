@@ -72,7 +72,7 @@ public class SetupScreen extends JPanel{
 		
 		submitButton = new JButton("Submit");
 		browseButton = new JButton("Browse...");
-		backButton = new JButton("Back");
+//		backButton = new JButton("Back");
 		
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 		
@@ -95,7 +95,7 @@ public class SetupScreen extends JPanel{
 		feedbackLabel.setFont(bigWords);
 		filePathTextField.setFont(bigWords);
 		submitButton.setFont(bigWords);
-		backButton.setFont(bigWords);
+//		backButton.setFont(bigWords);
 		browseButton.setFont(bigWords);
 		darkModeToggleButton.setFont(bigWords);
 		
@@ -139,11 +139,11 @@ public class SetupScreen extends JPanel{
 		gbc.weightx = .25;
 		this.add(submitButton, gbc);
 		
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.gridx = 0; 
-		gbc.gridy = 3;
-		gbc.gridwidth = 3;
-		this.add(backButton, gbc);
+//		gbc.fill = GridBagConstraints.NONE;
+//		gbc.gridx = 0; 
+//		gbc.gridy = 3;
+//		gbc.gridwidth = 3;
+//		this.add(backButton, gbc);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0; 
@@ -192,14 +192,14 @@ public class SetupScreen extends JPanel{
 			
 		});
 		
-		backButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {	
-					frameManager.swapPanel(FrameManager.swappablePanel.LOGIN);
-			}
-			
-		});
+//		backButton.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {	
+//					frameManager.swapPanel(FrameManager.swappablePanel.LOGIN);
+//			}
+//			
+//		});
 		
 		//If default text, sets it to blank
 		filePathTextField.addFocusListener(new FocusListener() {

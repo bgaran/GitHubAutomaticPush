@@ -64,7 +64,7 @@ public class GitHubHelper {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" 
 						+ "\" && git diff" + " && pause" + " && exit\"");
 				
-				return "GitHub Diff Success";
+				return "GitHub Diff Success!";
 		} else {
 				System.out.println(os);
 				
