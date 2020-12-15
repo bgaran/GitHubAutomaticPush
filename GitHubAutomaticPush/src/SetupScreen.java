@@ -296,8 +296,6 @@ public class SetupScreen extends JPanel{
 		else {
 			darkModeToggleButton.setSelected(false); //set it so the togglebutton is off
 		}
-		
-		//reset feedbackLabel
 	}
 	
 	/**
