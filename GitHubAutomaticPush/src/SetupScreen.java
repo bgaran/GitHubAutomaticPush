@@ -161,7 +161,7 @@ public class SetupScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(!filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\") && !filePathTextField.getText().equals("")) { //simple checking for nothing
+				if(!filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\") && !filePathTextField.getText().equals("")) { //simple checking for 
 					filePath = filePathTextField.getText();
 					//GHH.ConnectToGitHub(username, password, filePath);
 					frameManager.git.projectPath=filePath;
