@@ -388,6 +388,11 @@ public class GitCommandCenterScreen extends JPanel{
 		else {
 			darkModeToggleButton.setSelected(false); //set it so the togglebutton is off
 		}
+		
+		//resize feedbacklabel & feedbackpane
+		feedbackLabel.setPreferredSize(new Dimension(this.getWidth()-this.getWidth()/20,10000));// set feedbackLabel height to 10000 to accommodate for long git differences
+		  																						// that can be scrolled within the feedbackPane
+		feedbackPane.setPreferredSize(new Dimension(this.getWidth()-this.getWidth()/20, this.getHeight()-this.getHeight()/3));
 	}
 }
 
