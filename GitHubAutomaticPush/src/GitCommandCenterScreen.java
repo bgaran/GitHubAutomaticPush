@@ -166,9 +166,9 @@ public class GitCommandCenterScreen extends JPanel{
 		gbc.fill = GridBagConstraints.NONE;
 		feedbackLabel.setWrapStyleWord(true);
 		feedbackLabel.setLineWrap(true);
-		feedbackLabel.setPreferredSize(new Dimension(width-20,10000));// set feedbackLabel height to 10000 to accommodate for long git differences
+		feedbackLabel.setPreferredSize(new Dimension(width-width/20,10000));// set feedbackLabel height to 10000 to accommodate for long git differences
 																	  // that can be scrolled within the feedbackPane
-		feedbackPane.setPreferredSize(new Dimension(width-20, height-150));
+		feedbackPane.setPreferredSize(new Dimension(width-width/20, height-height/4));
 		gbc.gridx = 0; 
 		gbc.gridy = 2;
 		gbc.gridwidth = 4;
