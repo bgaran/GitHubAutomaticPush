@@ -358,12 +358,14 @@ public class GitCommandCenterScreen extends JPanel{
 			setBackground(Color.DARK_GRAY);
             infoLabel.setForeground(Color.white);
             feedbackLabel.setForeground(Color.white);
+            feedbackLabel.setBackground(Color.BLACK);
 		}
 		else {
 			//switch OFF dark mode
 			setBackground(Color.WHITE);
             infoLabel.setForeground(Color.black);
             feedbackLabel.setForeground(Color.black);
+            feedbackLabel.setBackground(Color.LIGHT_GRAY);
 		}
 	}
 	

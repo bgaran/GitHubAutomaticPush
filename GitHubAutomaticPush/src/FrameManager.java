@@ -20,8 +20,6 @@ public class FrameManager {
 	
 	private int screenHeight;
 	
-	private LoginScreen login;
-	
 	private SetupScreen setup;
 	
 	private GitCommandCenterScreen center;
@@ -35,7 +33,6 @@ public class FrameManager {
 	public boolean isDarkMode = false; //initialize the program with dark mode deselected
 	
 	enum swappablePanel{ //for swapPanel() method
-		LOGIN,
 		SETUP,
 		CENTER
 	};
@@ -50,13 +47,12 @@ public class FrameManager {
 		screenWidth = screen.width/2;
 		screenHeight = screen.height/2;
 		
-		login = new LoginScreen(screenWidth, screenHeight, Color.white, this);
 		setup = new SetupScreen(screenWidth, screenHeight, Color.white, this);
 		center = new GitCommandCenterScreen(screenWidth, screenHeight, Color.white, this);
 		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(login);  
+		frame.add(setup);  
 		frame.pack();
 		frame.setVisible(true);
 	}
@@ -66,10 +62,7 @@ public class FrameManager {
 	 * @param panelName - simply the name of the class you wish to set 
 	 */
 	public void swapPanel(swappablePanel panelName) {
-		if(panelName == swappablePanel.LOGIN) {
-			swapPanel(login);
-		}
-		else if(panelName == swappablePanel.SETUP) {
+		if(panelName == swappablePanel.SETUP) {
 			swapPanel(setup);
 		}
 		else if (panelName == swappablePanel.CENTER) {
