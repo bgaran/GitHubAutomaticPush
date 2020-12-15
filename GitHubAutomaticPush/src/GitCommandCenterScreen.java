@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 //import 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
@@ -41,27 +42,11 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private JLabel infoLabel /*, feedbackLabel*/;
 	
+	private JScrollPane feedbackPane;//will hold the feedback label to accomodate long git differences.
 	private JTextArea feedbackLabel;
 	
-	private String feedbackMessage = "Your command feedback will appear here."
-			+ "---------------------------------------------------------------------------------------------------------------------------------"
-			+ "---------------------------------------------------------------------------------------------------------------------------------"
-			+ "---------------------------------------------------------------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------"
-			+ "-----------------------------------------------------------------------------=";
-		
+	private String feedbackMessage = "Your command feedback will appear here.";
+
 	private JButton pullButton, diffButton, cloneButton, backButton;
 	
 	private JToggleButton pushToggleButton, darkModeToggleButton;
@@ -101,6 +86,8 @@ public class GitCommandCenterScreen extends JPanel{
 		//initialize all UI elements
 		infoLabel = new JLabel("Perform Git commands!");
 		feedbackLabel = new JTextArea(feedbackMessage);
+		feedbackPane = new JScrollPane(feedbackLabel);
+		feedbackLabel.setPreferredSize(new Dimension(400, 300));
 		
 		pushToggleButton = new JToggleButton("Push");
 		pullButton = new JButton("Pull");
@@ -179,12 +166,14 @@ public class GitCommandCenterScreen extends JPanel{
 		gbc.fill = GridBagConstraints.NONE;
 		feedbackLabel.setWrapStyleWord(true);
 		feedbackLabel.setLineWrap(true);
-		feedbackLabel.setPreferredSize(new Dimension(width-20, height-150));
+		feedbackLabel.setPreferredSize(new Dimension(width-20,10000));// set feedbackLabel height to 10000 to accommodate for long git differences
+																	  // that can be scrolled within the feedbackPane
+		feedbackPane.setPreferredSize(new Dimension(width-20, height-150));
 		gbc.gridx = 0; 
 		gbc.gridy = 2;
 		gbc.gridwidth = 4;
 		gbc.weighty = .65;
-		this.add(feedbackLabel, gbc);
+		this.add(feedbackPane,gbc);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 1; 
