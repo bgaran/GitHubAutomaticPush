@@ -34,7 +34,7 @@ public class GitHubHelper {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"cd " + projectPath + "\""
 						+ "\" && git add . && git commit -m \""+LocalDateTime.now()+"\" && git push\"");
 				
-				return "Git Push Success!";	
+				return "Any new changes have been pushed";	
 		}
 		else{
 			System.out.println(os);
@@ -64,7 +64,10 @@ public class GitHubHelper {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" 
 						+ "\" && git diff" + " && pause" + " && exit\"");
 				
-				return "GitHub Diff Success!";
+				return "Your diff will appear in your command prompt window. Anything that is red or green is "
+						+ "where your local file and the current repo file differ. Red is what is currently in "
+						+ "the repo and green is what is currently in your local file. If there is nothing there, "
+						+ "then there are no differences. Press any key to exit the command prompt window";
 		} else {
 				System.out.println(os);
 				
@@ -85,7 +88,7 @@ public class GitHubHelper {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"cd " + projectPath + "\"" 
 						+ "\" && git pull\"");
 				
-				return "Git Pull Success!";
+				return "Your local files should now reflect what is currently in the repository";
 		}
 		else{
 				String command = " cd " + projectPath + " && git pull";
@@ -107,7 +110,10 @@ public class GitHubHelper {
 			Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"cd " + destPath + "\"" 
 					+ "\" && git clone " + gitURL + "\"");
 			
-			return "Git Clone Success!";
+			return "The cloned project should now be in your specified folder. To use this project, in Eclipse "
+					+ "select File > Open Projects from File System... and navigate to this cloned project using "
+					+ "the Directory button. Note: You may need to change the file path to this new cloned project "
+					+ "in this Git Helper to use the other git commands";
 		} else {
 			String command = " cd " + destPath + " && git clone " + gitURL;
 			return excecuteMacCommand(command);
