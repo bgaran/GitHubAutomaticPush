@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 //import 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
 /**
@@ -38,9 +39,28 @@ public class GitCommandCenterScreen extends JPanel{
 	
 	private FrameManager frameManager; //LINKED TO SWAP PANELS
 	
-	private JLabel infoLabel, feedbackLabel;
+	private JLabel infoLabel /*, feedbackLabel*/;
 	
-	private String feedbackMessage = "Your command feedback will appear here.";
+	private JTextArea feedbackLabel;
+	
+	private String feedbackMessage = "Your command feedback will appear here."
+			+ "---------------------------------------------------------------------------------------------------------------------------------"
+			+ "---------------------------------------------------------------------------------------------------------------------------------"
+			+ "---------------------------------------------------------------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------"
+			+ "-----------------------------------------------------------------------------=";
 		
 	private JButton pullButton, diffButton, cloneButton, backButton;
 	
@@ -80,7 +100,7 @@ public class GitCommandCenterScreen extends JPanel{
 		
 		//initialize all UI elements
 		infoLabel = new JLabel("Perform Git commands!");
-		feedbackLabel = new JLabel(feedbackMessage);
+		feedbackLabel = new JTextArea(feedbackMessage);
 		
 		pushToggleButton = new JToggleButton("Push");
 		pullButton = new JButton("Pull");
@@ -155,7 +175,11 @@ public class GitCommandCenterScreen extends JPanel{
 		gbc.weighty = .12;
 		this.add(cloneButton, gbc);
 		
+		
 		gbc.fill = GridBagConstraints.NONE;
+		feedbackLabel.setWrapStyleWord(true);
+		feedbackLabel.setLineWrap(true);
+		feedbackLabel.setPreferredSize(new Dimension(width-20, height-150));
 		gbc.gridx = 0; 
 		gbc.gridy = 2;
 		gbc.gridwidth = 4;
