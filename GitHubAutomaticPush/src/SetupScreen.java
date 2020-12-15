@@ -104,6 +104,7 @@ public class SetupScreen extends JPanel{
 
 		//align all UI elements correctly
 	    infoLabel.setHorizontalAlignment(JLabel.CENTER);
+	    feedbackLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		//finally, add all UI elements to the SetupScreen
 	    gbc.fill = GridBagConstraints.BOTH;
@@ -161,7 +162,7 @@ public class SetupScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(!filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\") && !filePathTextField.getText().equals("")) { //simple checking for nothin
+				if(!filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\") && !filePathTextField.getText().equals("")) { //simple checking for nothing
 					filePath = filePathTextField.getText();
 					//GHH.ConnectToGitHub(username, password, filePath);
 					frameManager.git.projectPath=filePath;
@@ -211,7 +212,7 @@ public class SetupScreen extends JPanel{
 			public void focusGained(FocusEvent arg0) {
 				if(filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\")) {
 					filePathTextField.setText("");
-					filePathTextField.setForeground(Color.black);
+					setFilePathTextColor();
 				}
 			}
 
@@ -219,7 +220,7 @@ public class SetupScreen extends JPanel{
 			public void focusLost(FocusEvent arg0) {
 				if(filePathTextField.getText().equals("")) {
 					filePathTextField.setText("ex. H:\\workspace\\CS128 HW1\\src\\");
-					filePathTextField.setForeground(Color.gray);
+					setFilePathTextColor();
 				}
 			}
 			
@@ -256,18 +257,21 @@ public class SetupScreen extends JPanel{
 	 * @author April Miller
 	 */
 	public void updateUITheme(boolean isDarkMode) {
+		setFilePathTextColor();
 		if(isDarkMode) {
 			//switch ON dark mode
-			setBackground(Color.DARK_GRAY);
+			setBackground(Color.black);
             infoLabel.setForeground(Color.white);
             filePathLabel.setForeground(Color.white);
             feedbackLabel.setForeground(Color.white);
+            filePathTextField.setBackground(Color.DARK_GRAY);
 		}
 		else {
 			setBackground(Color.WHITE);
             infoLabel.setForeground(Color.black);
             filePathLabel.setForeground(Color.black);
             feedbackLabel.setForeground(Color.black);
+            filePathTextField.setBackground(Color.LIGHT_GRAY);
 		}
 	}
 	
@@ -294,8 +298,29 @@ public class SetupScreen extends JPanel{
 		}
 		
 		//reset feedbackLabel
-		feedbackLabel.setText("");
 	}
 	
-	//private void (set)
+	/**
+	 * Sets the filePathTextField text color based on whether sample text is in there and if it is in dark mode
+	 * 
+	 * @author Griffin White
+	 */
+	private void setFilePathTextColor() {
+		if(filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\")) {
+			if(frameManager.isDarkMode) {
+				filePathTextField.setForeground(Color.LIGHT_GRAY);
+			}
+			else {
+				filePathTextField.setForeground(Color.DARK_GRAY);
+			}
+		}
+		else {
+			if(frameManager.isDarkMode) {
+				filePathTextField.setForeground(Color.white);
+			}
+			else {
+				filePathTextField.setForeground(Color.black);
+			}
+		}
+	}
 }

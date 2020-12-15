@@ -356,10 +356,10 @@ public class GitCommandCenterScreen extends JPanel{
 	public void updateUITheme(boolean isDarkMode) {
 		if(isDarkMode) {
 			//switch ON dark mode
-			setBackground(Color.DARK_GRAY);
+			setBackground(Color.BLACK);
             infoLabel.setForeground(Color.white);
             feedbackLabel.setForeground(Color.white);
-            feedbackLabel.setBackground(Color.BLACK);
+            feedbackLabel.setBackground(Color.DARK_GRAY);
 		}
 		else {
 			//switch OFF dark mode
