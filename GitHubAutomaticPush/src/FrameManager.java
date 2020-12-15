@@ -51,6 +51,7 @@ public class FrameManager {
 		center = new GitCommandCenterScreen(screenWidth, screenHeight, Color.white, this);
 		
 		frame = new JFrame();
+		frame.setTitle("R3gurGIT8");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(setup);  
 		frame.pack();
