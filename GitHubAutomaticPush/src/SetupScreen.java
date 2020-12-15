@@ -161,14 +161,17 @@ public class SetupScreen extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				filePath = filePathTextField.getText();
-				//GHH.ConnectToGitHub(username, password, filePath);
-				frameManager.git.projectPath=filePath;
-				
-				feedbackLabel.setText("");
-				//if feedbackLabel 
-				if(feedbackLabel.getText().equals("")) {
-					frameManager.swapPanel(FrameManager.swappablePanel.CENTER);
+				if(!filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\") && !filePathTextField.getText().equals("")) { //simple checking
+					filePath = filePathTextField.getText();
+					//GHH.ConnectToGitHub(username, password, filePath);
+					frameManager.git.projectPath=filePath;
+					
+					feedbackLabel.setText("");
+					if(feedbackLabel.getText().equals("")) {
+						frameManager.swapPanel(FrameManager.swappablePanel.CENTER);
+					}
+				}else {
+					feedbackLabel.setText("Please input a file path");
 				}
 			}
 			
@@ -293,4 +296,6 @@ public class SetupScreen extends JPanel{
 		//reset feedbackLabel
 		feedbackLabel.setText("");
 	}
+	
+	//private void (set)
 }
