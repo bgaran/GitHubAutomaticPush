@@ -101,6 +101,20 @@ public class GitCommandCenterScreen extends JPanel {
 		backButton = new JButton("Back");
 
 		darkModeToggleButton = new JToggleButton("Dark Mode");
+		
+		// tooltips
+		backButton.setToolTipText("go back to the setup screen");
+		darkModeToggleButton.setToolTipText("toggle between light mode and dark mode");
+
+		// accessibility
+		pushToggleButton.getAccessibleContext().setAccessibleDescription("Push Button");
+		pullButton.getAccessibleContext().setAccessibleDescription("Pull Button");
+		diffButton.getAccessibleContext().setAccessibleDescription("Diff Button");
+		cloneButton.getAccessibleContext().setAccessibleDescription("Clone Button");
+		backButton.getAccessibleContext().setAccessibleDescription("Back-go back to the set up screen");
+		darkModeToggleButton.getAccessibleContext().setAccessibleDescription("toggle between "
+				+ "dark mode and light mode");
+		
 
 		if (this.frameManager.isDarkMode) { // if it is in dark mode
 			darkModeToggleButton.setSelected(true); // set it so the togglebutton is on
@@ -391,54 +405,64 @@ public class GitCommandCenterScreen extends JPanel {
 			cloneButton.setEnabled(true);
 			diffButton.setEnabled(false);
 
-			pushToggleButton.setToolTipText("The push featue is not available to users cloning a new repository."
-					+ "If you have cloned your repository already, please click the back button, browse to locate your "
-					+ "new file, and select the professor option before submitting to use this feature.");
-			pullButton.setToolTipText("The pull featue is not available to users cloning a new repository."
-					+ "If you have cloned your repository already, please click the back button, browse to locate your "
-					+ "new file, and select the student option before submitting to use this feature.");
-			cloneButton.setToolTipText("This option will clone a repository to the file path you submitted on the "
-					+ "previous page. You will be asked to provide the URL for the remote GitHub repository "
-					+ "you wish to clone");
-			diffButton.setToolTipText("The diff featue is not available to users cloning a new repository."
-					+ "If you have cloned your repository already, please click the back button, browse to locate your "
-					+ "new file, and select the student option before submitting to use this feature.");
+			pushToggleButton.setToolTipText(
+					"<html><p width=\"500\">The push featue is not available to users cloning a new repository."
+							+ "If you have cloned your repository already, please click the back button, browse to locate your "
+							+ "new file, and select the professor option before submitting to use this feature.</p></html>");
+			pullButton.setToolTipText(
+					"<html><p width=\"500\">The pull featue is not available to users cloning a new repository."
+							+ "If you have cloned your repository already, please click the back button, browse to locate your "
+							+ "new file, and select the student option before submitting to use this feature.</p></html>");
+			cloneButton.setToolTipText(
+					"<html><p width=\"500\">This option will clone a repository to the file path you submitted on the "
+							+ "previous page. You will be asked to provide the URL for the remote GitHub repository "
+							+ "you wish to clone. </p></html>");
+			diffButton.setToolTipText(
+					"<html><p width=\"500\">The diff featue is not available to users cloning a new repository."
+							+ "If you have cloned your repository already, please click the back button, browse to locate your "
+							+ "new file, and select the student option before submitting to use this feature.</p></html>");
 		} else if (frameManager.userType == "student") {
 			pushToggleButton.setEnabled(false);
 			pullButton.setEnabled(true);
 			cloneButton.setEnabled(false);
 			diffButton.setEnabled(true);
 
-			pushToggleButton.setToolTipText("The push featue is not available to users cloning a new repository."
-					+ "If you have cloned your repository already, please click the back button, browse to locate your "
-					+ "new file, and select the professor option before submitting to use this feature.");
-			pullButton.setToolTipText("This feature will pull the professors latest changes to the remote"
-					+ "repository.  NOTE: THIS WILL WRITE OVER YOUR CURRENT PROGRESS");
-			cloneButton.setToolTipText("The clone featue is not available to students."
+			pushToggleButton.setToolTipText(
+					"<html><p width=\"500\">The push featue is not available to users cloning a new repository."
+							+ "If you have cloned your repository already, please click the back button, browse to locate your "
+							+ "new file, and select the professor option before submitting to use this feature.</p></html>");
+			pullButton.setToolTipText(
+					"<html><p width=\"500\">This feature will pull the professors latest changes to the remote"
+							+ "repository.  NOTE: THIS WILL WRITE OVER YOUR CURRENT PROGRESS</p></html>");
+			cloneButton.setToolTipText("<html><p width=\"500\">The clone featue is not available to students."
 					+ "If you wish to clone a repository, please click the back button, browse to the location"
-					+ "you wish to clone to, and select the 'Clone New Repository' option before submitting.");
-			diffButton.setToolTipText("This option will display the differences between your currently saved "
-					+ "local repository and your professor's remote respository. For Windows users, you will see"
-					+ "instructions to view your differenced below.  All other Operating Systems will see the changes"
-					+ "below with + indicating a line that you have that is not in the repository"
-					+ " and - indicating a line in the repository that you do not have.");
+					+ "you wish to clone to, and select the 'Clone New Repository' option before submitting.</p></html>");
+			diffButton.setToolTipText(
+					"<html><p width=\"500\">This option will display the differences between your currently saved "
+							+ "local repository and your professor's remote respository. For Windows users, you will see"
+							+ "instructions to view your differenced below.  All other Operating Systems will see the changes"
+							+ "below with + indicating a line that you have that is not in the repository"
+							+ " and - indicating a line in the repository that you do not have.</p></html>");
 		} else if (frameManager.userType == "professor") {
 			pushToggleButton.setEnabled(true);
 			pullButton.setEnabled(false);
 			cloneButton.setEnabled(false);
 			diffButton.setEnabled(false);
 
-			pushToggleButton.setToolTipText("This option will begin to push your most recent saved changes to the"
-					+ " respository every 30 seconds.");
-			pullButton.setToolTipText("The pull featue is not available to users cloning a new repository."
-					+ "If you have cloned your repository already, please click the back button, browse to locate your "
-					+ "new file, and select the student option before submitting to use this feature.");
-			cloneButton.setToolTipText("The clone featue is not available to students."
+			pushToggleButton.setToolTipText(
+					"<html><p width=\"500\">This option will begin to push your most recent saved changes to the"
+							+ " respository every 30 seconds.</p></html>");
+			pullButton.setToolTipText(
+					"<html><p width=\"500\">The pull featue is not available to users cloning a new repository."
+							+ "If you have cloned your repository already, please click the back button, browse to locate your "
+							+ "new file, and select the student option before submitting to use this feature.</p></html>");
+			cloneButton.setToolTipText("<html><p width=\"500\">The clone featue is not available to students."
 					+ "If you wish to clone a repository, please click the back button, browse to the location"
-					+ "you wish to clone to, and select the 'Clone New Repository' option before submitting.");
-			diffButton.setToolTipText("The diff featue is not available to users cloning a new repository."
-					+ "If you have cloned your repository already, please click the back button, browse to locate your "
-					+ "new file, and select the student option before submitting to use this feature.");
+					+ "you wish to clone to, and select the 'Clone New Repository' option before submitting.</p></html>");
+			diffButton.setToolTipText(
+					"<html><p width=\"500\">The diff featue is not available to users cloning a new repository."
+							+ "If you have cloned your repository already, please click the back button, browse to locate your "
+							+ "new file, and select the student option before submitting to use this feature.</p></html>");
 		}
 	}
 
