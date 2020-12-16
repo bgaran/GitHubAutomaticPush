@@ -82,8 +82,8 @@ public class GitHubHelper {
 	}
 
 	/**
-	 * This method will pull the latest version of code in the repo and overwrite
-	 * the local code with this copy
+	 * This method will reset your local copy with the latest version of code in the repo
+	 *  
 	 * @author Courtney Crawford
 	 * @author Breanna Garan
 	 * @throws IOException 
@@ -91,7 +91,7 @@ public class GitHubHelper {
 	public String githubPull() throws IOException {
 		if (os.contains("win")) {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"cd " + projectPath + "\"" 
-						+ "\" && git pull\"");
+						+ "\" && git fetch" + " && git reset --hard @{upstream}\"");
 				
 				return "Your local files should now reflect what is currently in the repository";
 		}

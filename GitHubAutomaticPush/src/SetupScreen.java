@@ -42,7 +42,7 @@ public class SetupScreen extends JPanel {
 
 	private String filePath;
 
-	private JButton submitButton, browseButton, backButton; // TODO: implement backButton
+	private JButton submitButton, browseButton; // TODO: implement backButton
 
 	private JToggleButton darkModeToggleButton; // used to toggle between dark mode and light mode
 
@@ -89,11 +89,10 @@ public class SetupScreen extends JPanel {
 
 		submitButton = new JButton("Submit");
 		browseButton = new JButton("Browse...");
-//		backButton = new JButton("Back");
 
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 
-//intialize radio buttons and button group
+		//intialize radio buttons and button group
 		cloneButton = new JRadioButton("Clone New Repository");
 		studentButton = new JRadioButton("Student");
 		professorButton = new JRadioButton("Professor");
@@ -144,7 +143,6 @@ public class SetupScreen extends JPanel {
 		feedbackLabel.setFont(bigWords);
 		filePathTextField.setFont(bigWords);
 		submitButton.setFont(bigWords);
-//		backButton.setFont(bigWords);
 		browseButton.setFont(bigWords);
 		darkModeToggleButton.setFont(bigWords);
 		cloneButton.setFont(bigWords);
@@ -171,12 +169,12 @@ public class SetupScreen extends JPanel {
 		gbc.gridx = 0; // center
 		gbc.gridy = 1;
 		gbc.gridwidth = 1;
-		// gbc.weighty = .25;
-		this.add(cloneButton, gbc);
-		gbc.gridx = 1;
 		this.add(studentButton, gbc);
-		gbc.gridx = 2;
+		// gbc.weighty = .25;
+		gbc.gridx = 1;
 		this.add(professorButton, gbc);
+		gbc.gridx = 2;
+		this.add(cloneButton, gbc);
 
 		// group the radio buttons together
 		bg.add(cloneButton);
@@ -209,12 +207,6 @@ public class SetupScreen extends JPanel {
 		gbc.gridwidth = 3;
 		gbc.weightx = .25;
 		this.add(submitButton, gbc);
-
-//		gbc.fill = GridBagConstraints.NONE;
-//		gbc.gridx = 0; 
-//		gbc.gridy = 3;
-//		gbc.gridwidth = 3;
-//		this.add(backButton, gbc);
 
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -269,15 +261,6 @@ public class SetupScreen extends JPanel {
 			}
 
 		});
-
-//		backButton.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {	
-//					frameManager.swapPanel(FrameManager.swappablePanel.LOGIN);
-//			}
-//			
-//		});
 
 		// If default text, sets it to blank
 		filePathTextField.addFocusListener(new FocusListener() {
@@ -343,6 +326,10 @@ public class SetupScreen extends JPanel {
 			cloneButton.setForeground(Color.white);
 			studentButton.setForeground(Color.white);
 			professorButton.setForeground(Color.white);
+			cloneButton.setBackground(Color.black);
+			studentButton.setBackground(Color.black);
+			professorButton.setBackground(Color.black);
+			
 		} else {
 			setBackground(Color.WHITE);
 			infoLabel.setForeground(Color.black);
@@ -351,7 +338,10 @@ public class SetupScreen extends JPanel {
 			filePathTextField.setBackground(Color.LIGHT_GRAY);
 			cloneButton.setForeground(Color.black);
 			studentButton.setForeground(Color.black);
-			professorButton.setForeground(Color.black);
+			professorButton.setForeground(Color.black);		
+			cloneButton.setBackground(Color.white);
+			studentButton.setBackground(Color.white);
+			professorButton.setBackground(Color.white);
 		}
 	}
 
