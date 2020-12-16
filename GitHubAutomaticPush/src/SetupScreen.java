@@ -107,6 +107,32 @@ public class SetupScreen extends JPanel {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.setPreferredSize(new Dimension(width / 2, height / 2));
 
+		// accessibility
+		submitButton.getAccessibleContext().setAccessibleDescription("Submit Button");
+		browseButton.getAccessibleContext().setAccessibleDescription("Browse Files Button");
+		darkModeToggleButton.getAccessibleContext().setAccessibleDescription("Dark Moe Toggle Button");
+		cloneButton.getAccessibleContext().setAccessibleDescription(
+				"Clone Option- Select if you are cloning " + "a repository for the first time.");
+		studentButton.getAccessibleContext().setAccessibleDescription(
+				"Student Option- Select if you are" + "a student working from an exisiting cloned repository.");
+		professorButton.getAccessibleContext().setAccessibleDescription(
+				"Professor Option- Select if you are" + "a professor working from an existing repository.");
+		infoLabel.getAccessibleContext()
+				.setAccessibleDescription("Please input your file path to current project src folder.");
+
+		// tooltips
+		submitButton
+				.setToolTipText("<html><p width=\"500\">Click this button to confirm the current file path and UserType"
+						+ "and continue to the Git Command Center screen</p></html>");
+		browseButton.setToolTipText("<html><p width=\"500\">Click this button to browse your files and navigate to your"
+				+ "desired file path.  If you are cloning for the first time. select the folder you would like to "
+				+ "clone to.  If you are looking for an existing cloned repository, select that repository from the "
+				+ "location you cloned it to.</p></html>");
+		darkModeToggleButton.setToolTipText("Toggle between light mode and dark mode.");
+		cloneButton.setToolTipText("Select if you are cloning " + "a repository for the first time.");
+		studentButton.setToolTipText("Select if you are" + "a student working from an exisiting cloned repository.");
+		professorButton.setToolTipText("Select if you are" + "a professor working from an existing repository.");
+
 		// create fonts
 		bigWords = new Font("Sans Serif", Font.PLAIN, width / 30); // Makes it so the text is easily seeable, using one
 																	// 30th of the window's width for the font size
@@ -170,7 +196,6 @@ public class SetupScreen extends JPanel {
 		gbc.gridy = 2;
 		gbc.weightx = .33;
 		this.add(browseButton, gbc);
-		browseButton.setToolTipText("Select an existing local repository");
 
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 2;
