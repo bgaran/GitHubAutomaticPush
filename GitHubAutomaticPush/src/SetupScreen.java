@@ -81,7 +81,7 @@ public class SetupScreen extends JPanel {
 		this.setLayout(gbl);
 
 		// initialize all UI elements
-		infoLabel = new JLabel("Please input your file path to current project src folder.");
+		infoLabel = new JLabel("Please input your file path to current project folder.");
 		filePathLabel = new JLabel("File path:");
 		feedbackLabel = new JLabel("");
 
