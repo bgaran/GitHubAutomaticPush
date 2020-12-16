@@ -169,12 +169,12 @@ public class SetupScreen extends JPanel {
 		gbc.gridx = 0; // center
 		gbc.gridy = 1;
 		gbc.gridwidth = 1;
-		// gbc.weighty = .25;
-		this.add(cloneButton, gbc);
-		gbc.gridx = 1;
 		this.add(studentButton, gbc);
-		gbc.gridx = 2;
+		// gbc.weighty = .25;
+		gbc.gridx = 1;
 		this.add(professorButton, gbc);
+		gbc.gridx = 2;
+		this.add(cloneButton, gbc);
 
 		// group the radio buttons together
 		bg.add(cloneButton);
