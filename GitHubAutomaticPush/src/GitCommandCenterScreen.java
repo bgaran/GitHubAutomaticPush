@@ -428,9 +428,8 @@ public class GitCommandCenterScreen extends JPanel {
 			cloneButton.setEnabled(false);
 			diffButton.setEnabled(false);
 
-			pushToggleButton.setToolTipText("The push featue is not available to users cloning a new repository."
-					+ "If you have cloned your repository already, please click the back button, browse to locate your "
-					+ "new file, and select the professor option before submitting to use this feature.");
+			pushToggleButton.setToolTipText("This option will begin to push your most recent saved changes to the"
+					+ " respository every 30 seconds.");
 			pullButton.setToolTipText("The pull featue is not available to users cloning a new repository."
 					+ "If you have cloned your repository already, please click the back button, browse to locate your "
 					+ "new file, and select the student option before submitting to use this feature.");
