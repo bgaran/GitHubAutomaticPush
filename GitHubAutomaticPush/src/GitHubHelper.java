@@ -62,16 +62,21 @@ public class GitHubHelper {
 	public String githubDiff() throws IOException {
 		if (os.contains("win")) {
 				Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + projectPath + "\"" 
-						+ "\" && git diff" + " && pause" + " && exit\"");
+						+ "\" && git fetch" + " && git diff @{upstream}" +" && pause"+ " && exit\"");
 				
 				return "Your diff will appear in your command prompt window. Anything that is red or green is "
 						+ "where your local file and the current repo file differ. Red is what is currently in "
-						+ "the repo and green is what is currently in your local file. If there is nothing there, "
-						+ "then there are no differences. Press any key to exit the command prompt window";
+						+ "the repo and green is what is currently in your local file. If you see a colon : at the "
+						+ "end of the command prompt, you are in an interactive session to view the differences. Use "
+						+ "the arrow keys to navigate and type \"q\" to end the interactive session. Then press any "
+						+ "key to exit the command prompt window";
 		} else {
 				System.out.println(os);
 				
-				String command = " cd " + projectPath + " && git diff";
+				String command = " cd " + projectPath + "&& git fetch && git diff @{upstream}"; 
+				//@{upstream} references the remote repository and will get the differences
+				//between students local clone and the professors remote repo
+					
 				return excecuteMacCommand(command);
 		}
 	}
