@@ -73,7 +73,10 @@ public class GitHubHelper {
 		} else {
 				System.out.println(os);
 				
-				String command = " cd " + projectPath + " && git diff";
+				String command = " cd " + projectPath + "&& git fetch && git diff @{upstream}"; 
+				//@{upstream} references the remote repository and will get the differences
+				//between students local clone and the professors remote repo
+					
 				return excecuteMacCommand(command);
 		}
 	}
