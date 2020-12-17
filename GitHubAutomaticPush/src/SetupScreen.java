@@ -85,7 +85,7 @@ public class SetupScreen extends JPanel {
 		filePathLabel = new JLabel("File path:");
 		feedbackLabel = new JLabel("");
 
-		filePathTextField = new JTextField("ex. H:\\workspace\\CS128 HW1\\src\\");
+		filePathTextField = new JTextField("ex. H:\\workspace\\CS128 HW1\\");
 
 		submitButton = new JButton("Submit");
 		browseButton = new JButton("Browse...");
@@ -101,7 +101,7 @@ public class SetupScreen extends JPanel {
 		// initialize file chooser
 		fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File("."));
-		fileChooser.setDialogTitle("Select the current project's src folder:");
+		fileChooser.setDialogTitle("Select the current project's folder:");
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.setPreferredSize(new Dimension(width / 2, height / 2));
@@ -117,7 +117,7 @@ public class SetupScreen extends JPanel {
 		professorButton.getAccessibleContext().setAccessibleDescription(
 				"Professor Option- Select if you are" + "a professor working from an existing repository.");
 		infoLabel.getAccessibleContext()
-				.setAccessibleDescription("Please input your file path to current project src folder.");
+				.setAccessibleDescription("Please input your file path to current project folder.");
 
 		// tooltips
 		submitButton
@@ -226,7 +226,7 @@ public class SetupScreen extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				frameManager.userType = getUserType();// sets the current userType in FrameManager on submit
 
-				if (!filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\")
+				if (!filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\")
 						&& !filePathTextField.getText().equals("")) { // simple checking for nothing
 					filePath = filePathTextField.getText();
 					// GHH.ConnectToGitHub(username, password, filePath);
@@ -252,9 +252,9 @@ public class SetupScreen extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				if (fileChooser.showOpenDialog(setup) == JFileChooser.APPROVE_OPTION) {
 					filePathTextField.setText("" + fileChooser.getSelectedFile());
-					feedbackLabel.setText("Please select your src folder.");
+					feedbackLabel.setText("Please select your folder.");
 				} else {
-					feedbackLabel.setText("Please select your src folder.");
+					feedbackLabel.setText("Please select your folder.");
 					// TODO check for whether or not the file path ends in /src/, if not, warn the
 					// user.
 				}
@@ -267,7 +267,7 @@ public class SetupScreen extends JPanel {
 
 			@Override
 			public void focusGained(FocusEvent arg0) {
-				if (filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\")) {
+				if (filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\")) {
 					filePathTextField.setText("");
 					setFilePathTextColor();
 				}
@@ -276,7 +276,7 @@ public class SetupScreen extends JPanel {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				if (filePathTextField.getText().equals("")) {
-					filePathTextField.setText("ex. H:\\workspace\\CS128 HW1\\src\\");
+					filePathTextField.setText("ex. H:\\workspace\\CS128 HW1\\");
 					setFilePathTextColor();
 				}
 			}
@@ -376,7 +376,7 @@ public class SetupScreen extends JPanel {
 	 * @author Griffin White
 	 */
 	private void setFilePathTextColor() {
-		if (filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\src\\")) {
+		if (filePathTextField.getText().equals("ex. H:\\workspace\\CS128 HW1\\")) {
 			if (frameManager.isDarkMode) {
 				filePathTextField.setForeground(Color.LIGHT_GRAY);
 			} else {
