@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"Driver"},{"p":"<Unnamed>","l":"FrameManager"},{"p":"<Unnamed>","l":"GitCommandCenterScreen"},{"p":"<Unnamed>","l":"GitHubHelper"},{"p":"<Unnamed>","l":"SetupScreen"},{"p":"<Unnamed>","l":"FrameManager.swappablePanel"}]
