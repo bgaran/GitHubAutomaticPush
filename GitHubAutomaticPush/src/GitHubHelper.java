@@ -96,7 +96,7 @@ public class GitHubHelper {
 				return "Your local files should now reflect what is currently in the repository";
 		}
 		else{
-				String command = " cd " + projectPath + " && git pull";
+				String command = " cd " + projectPath + " && git reset --hard @{upstream}";
 				return excecuteMacCommand(command);
 		}
 	}

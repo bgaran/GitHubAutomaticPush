@@ -101,20 +101,18 @@ public class GitCommandCenterScreen extends JPanel {
 		backButton = new JButton("Back");
 
 		darkModeToggleButton = new JToggleButton("Dark Mode");
-		
+
 		// tooltips
-		backButton.setToolTipText("go back to the setup screen");
-		darkModeToggleButton.setToolTipText("toggle between light mode and dark mode");
+		backButton.setToolTipText("Go back to the setup screen.");
+		darkModeToggleButton.setToolTipText("Toggle between light mode and dark mode.");
 
 		// accessibility
 		pushToggleButton.getAccessibleContext().setAccessibleDescription("Push Button");
 		pullButton.getAccessibleContext().setAccessibleDescription("Pull Button");
 		diffButton.getAccessibleContext().setAccessibleDescription("Diff Button");
 		cloneButton.getAccessibleContext().setAccessibleDescription("Clone Button");
-		backButton.getAccessibleContext().setAccessibleDescription("Back-go back to the set up screen");
-		darkModeToggleButton.getAccessibleContext().setAccessibleDescription("toggle between "
-				+ "dark mode and light mode");
-		
+		backButton.getAccessibleContext().setAccessibleDescription("Back-go back to the set up screen.");
+		darkModeToggleButton.getAccessibleContext().setAccessibleDescription("toggle between dark mode and light mode.");
 
 		if (this.frameManager.isDarkMode) { // if it is in dark mode
 			darkModeToggleButton.setSelected(true); // set it so the togglebutton is on
@@ -149,8 +147,6 @@ public class GitCommandCenterScreen extends JPanel {
 		gbc.weighty = .10;
 		this.add(infoLabel, gbc);
 
-		// if(frameManager.userType=="professor")
-		// {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(0, 5, 0, 5); // set padding between buttons for left and right sides
 		gbc.gridx = 0;
@@ -159,10 +155,7 @@ public class GitCommandCenterScreen extends JPanel {
 		gbc.weightx = .33;
 		gbc.weighty = .12;
 		this.add(pushToggleButton, gbc);
-		// }
 
-		// if(frameManager.userType=="student")
-		// {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 1;
 		gbc.gridy = 1;
@@ -178,10 +171,7 @@ public class GitCommandCenterScreen extends JPanel {
 		gbc.weightx = .33;
 		gbc.weighty = .12;
 		this.add(diffButton, gbc);
-		// }
 
-		// if(frameManager.userType=="clone")
-		// {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 3;
 		gbc.gridy = 1;
@@ -189,7 +179,6 @@ public class GitCommandCenterScreen extends JPanel {
 		gbc.weightx = .33;
 		gbc.weighty = .12;
 		this.add(cloneButton, gbc);
-		// }
 
 		gbc.fill = GridBagConstraints.NONE;
 		feedbackLabel.setEditable(false);

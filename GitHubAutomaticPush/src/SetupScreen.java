@@ -92,7 +92,7 @@ public class SetupScreen extends JPanel {
 
 		darkModeToggleButton = new JToggleButton("Dark Mode");
 
-		//intialize radio buttons and button group
+		// intialize radio buttons and button group
 		cloneButton = new JRadioButton("Clone New Repository");
 		studentButton = new JRadioButton("Student");
 		professorButton = new JRadioButton("Professor");
@@ -109,7 +109,7 @@ public class SetupScreen extends JPanel {
 		// accessibility
 		submitButton.getAccessibleContext().setAccessibleDescription("Submit Button");
 		browseButton.getAccessibleContext().setAccessibleDescription("Browse Files Button");
-		darkModeToggleButton.getAccessibleContext().setAccessibleDescription("Dark Moe Toggle Button");
+		darkModeToggleButton.getAccessibleContext().setAccessibleDescription("Dark Mode Toggle Button");
 		cloneButton.getAccessibleContext().setAccessibleDescription(
 				"Clone Option- Select if you are cloning " + "a repository for the first time.");
 		studentButton.getAccessibleContext().setAccessibleDescription(
@@ -122,7 +122,7 @@ public class SetupScreen extends JPanel {
 		// tooltips
 		submitButton
 				.setToolTipText("<html><p width=\"500\">Click this button to confirm the current file path and UserType"
-						+ "and continue to the Git Command Center screen</p></html>");
+						+ "and continue to the Git Command Center screen.</p></html>");
 		browseButton.setToolTipText("<html><p width=\"500\">Click this button to browse your files and navigate to your"
 				+ "desired file path.  If you are cloning for the first time. select the folder you would like to "
 				+ "clone to.  If you are looking for an existing cloned repository, select that repository from the "
@@ -329,7 +329,7 @@ public class SetupScreen extends JPanel {
 			cloneButton.setBackground(Color.black);
 			studentButton.setBackground(Color.black);
 			professorButton.setBackground(Color.black);
-			
+
 		} else {
 			setBackground(Color.WHITE);
 			infoLabel.setForeground(Color.black);
@@ -338,7 +338,7 @@ public class SetupScreen extends JPanel {
 			filePathTextField.setBackground(Color.LIGHT_GRAY);
 			cloneButton.setForeground(Color.black);
 			studentButton.setForeground(Color.black);
-			professorButton.setForeground(Color.black);		
+			professorButton.setForeground(Color.black);
 			cloneButton.setBackground(Color.white);
 			studentButton.setBackground(Color.white);
 			professorButton.setBackground(Color.white);
