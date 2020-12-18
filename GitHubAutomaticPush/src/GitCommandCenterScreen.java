@@ -429,8 +429,8 @@ public class GitCommandCenterScreen extends JPanel {
 					+ "you wish to clone to, and select the 'Clone New Repository' option before submitting.</p></html>");
 			diffButton.setToolTipText(
 					"<html><p width=\"500\">This option will display the differences between your currently saved "
-							+ "local repository and your professor's remote respository. For Windows users, you will see"
-							+ "instructions to view your differenced below.  All other Operating Systems will see the changes"
+							+ "local repository and your professor's remote respository. For Windows users, you will see "
+							+ "instructions to view your differences below.  All other Operating Systems will see the changes "
 							+ "below with + indicating a line that you have that is not in the repository"
 							+ " and - indicating a line in the repository that you do not have.</p></html>");
 		} else if (frameManager.userType == "professor") {
