@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{graphicx}
+\graphicspath{{/Users/breannagaran/Desktop/}}
+
+
+\title{R3gurGIT8 User Documentation}
+\author{Breanna Garan}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\doublespacing
+
+\section{Cloning a New Repository}
+1. Launch the R3gurGIT8 application and select the 'Clone New Repository' option:
+
+\includegraphics[scale=.5]{CloneOption.png}
+
+2. Browse to the location that you would like to clone the repository to:
+
+\includegraphics[scale=.5]{Browse}
+
+\includegraphics[scale=.5]{ChooseFile}
+
+3. Click the submit button to confirm your file path and open the Git Command Center.
+\includegraphics{SubmitButton.png}
+
+\newpage
+
+4. Select the Clone Option (This will by the only option available):
+
+\includegraphics[scale=.5]{CloneButton.png}
+
+5. When you click the clone button, a pop-up will appear.  Enter the git URL provided to you by your professor and click OK:
+
+\includegraphics{ClonePopUp.png}
+
+\newpage 
+
+6. After this, click the back arrow to return to the set-up screen:
+
+\includegraphics[scale=.4]{CloneSuccess.png}
+
+
+
+7. To add your newly cloned repository to your package explorer in Eclipse, launch eclipse and navigate to File--Open Projects from File System... :
+
+\includegraphics[scale=.49]{FileSystem}
+
+8. Click Directory.., navigate to your newly cloned repository, click Open, and then Finish:
+
+\includegraphics[scale=.55]{DirectoryButton.png}
+
+\includegraphics[scale=.42]{OpenFile.png}
+
+\includegraphics[scale=.4]{Finish.png}
+
+9. If this is your first time using GitHub in Eclipse, you may be asked to enter your GitHub credentials:
+
+\includegraphics[scale=.8]{GitCredentials.png}
+
+10. Locate your repository in the Git Repositories Pane:
+
+\includegraphics[scale=.8]{GitRepoPane.png}
+
+11. Right-Click and select Show In--Package Explorer:
+
+\includegraphics[scale=.5]{ShowPackage.png}
+
+12. The repository is now in the Package Explorer and ready for development:
+
+\includegraphics[scale=.6]{PackageExplorer.png}
+
+\newpage
+
+\section{Student Use}
+
+1. If you have not yet cloned your repository, please see the 'Cloning a New Repository' section.
+
+2. Launch the R3gurGIT8 application and select the Student option at the top of the screen.
+
+\includegraphics[scale=.45]{StudentOption.png}
+
+2. Browse to the location your cloned repository:
+
+\includegraphics[scale=.5]{Browse}
+
+\includegraphics[scale=.5]{ChooseFile}
+
+3. Click the submit button to confirm your repository and open the Git Command Center.
+\includegraphics[scale=.5]{SubmitButton.png}
+
+4.  You can now start following along with your professor.  If you fall behind or you code is not running correctly you can use the Diff or Pull buttons to get the code you are missing.
+
+\includegraphics[scale=.5]{StudentCommands.png}
+
+5.  If you click the diff command- the differences between your local repository and the professors progress in the remote repository will be displayed.  For Windows users, this will appear in a pop-up terminal window with red and green text indicating the differences.  For Mac users the differences will be displayed in the scroll box in the Git Command Center with + and - signs indicating differences.  Using the Diff command allows you to see differences and copy portions of code without completely writing over your whole local respository.
+
+\includegraphics[scale=.5]{MacDiff}
+\includegraphics[scale=.5]{WindowsDiff}
+
+\newpage
+
+6. Using the Pull command will allow you to pull the Professors most recently pushed local copy and overwrite your current progress.  NOTE: This will overwrite your entire local repository, so if you have comments or progress that you do not want to lose in other classes, do not use this feature.
+
+\includegraphics[scale=.5]{PullSuccess}
+
+\newpage
+
+\section{Professor Use}
+
+1. Launch the R3gurGIT8 application and select the professor option:
+
+\includegraphics[scale=.5]{ProfessorButton.png}
+
+2. Browse to the location your repository for today's class. NOTE: make sure to provide the students with the remote git URL or show them where they can find this to follow along:
+
+\includegraphics[scale=.5]{Browse}
+
+\includegraphics[scale=.5]{ChooseFile}
+
+3. Click the submit button to confirm your repository and open the Git Command Center.
+\includegraphics[scale=.5]{SubmitButton.png}
+
+4. To begin pushing your most recently saved changes every 30 seconds, press the push toggle button, which will then display Pushing...  NOTE: you can pause the pushing at any time by simply pressing the pushing... toggle so that it returns back to push.:
+
+\includegraphics[scale=.4]{PushToggle.png}
+
+
+5. The application will check every 30 seconds if there are new changes to push.  If it recognizes a change, it will push to the remote repository and display a message with details about the changes pushed.
+
+
+
+\includegraphics[scale=.4]{PushingMessage.png}
+
+\newpage
+
+\section{Additional Features}
+\subsection{Dark Mode}
+Users can toggle between dark mode and light mode by clicking the dark mode toggle button at the bottom of each screen.  Your dark mode preference will be carried over between screens until you change it again.
+
+\includegraphics[scale=.4]{SetUpDark.png}
+
+\includegraphics[scale=.4]{CommandCenterDark.png}
+
+\subsection{Tool Tips}
+Users can mouse over any button, option, or toggle to get more detailed instructions or tips about use and function.
+
+\includegraphics[scale=.5]{ToolTip.png}
+
+\subsection{Accessibility}
+All of R3gurGIT8's buttons, options, and toggles are set with java accessible descriptions for use with assistive technologies.
+
+\end{document}
