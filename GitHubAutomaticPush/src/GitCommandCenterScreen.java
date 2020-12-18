@@ -112,7 +112,8 @@ public class GitCommandCenterScreen extends JPanel {
 		diffButton.getAccessibleContext().setAccessibleDescription("Diff Button");
 		cloneButton.getAccessibleContext().setAccessibleDescription("Clone Button");
 		backButton.getAccessibleContext().setAccessibleDescription("Back-go back to the set up screen.");
-		darkModeToggleButton.getAccessibleContext().setAccessibleDescription("toggle between dark mode and light mode.");
+		darkModeToggleButton.getAccessibleContext()
+				.setAccessibleDescription("toggle between dark mode and light mode.");
 
 		if (this.frameManager.isDarkMode) { // if it is in dark mode
 			darkModeToggleButton.setSelected(true); // set it so the togglebutton is on
@@ -219,7 +220,6 @@ public class GitCommandCenterScreen extends JPanel {
 					// activate pushing
 					pushToggleButton.setText("Pushing...");
 					resumePushTimer();
-					feedbackLabel.setText("Git Push Success!");
 				} else {
 					// deactivate pushing
 					pushToggleButton.setText("Push");
@@ -344,7 +344,8 @@ public class GitCommandCenterScreen extends JPanel {
 			@Override
 			public void run() {
 				try {
-					frameManager.git.githubPush();
+					feedbackLabel.setText(frameManager.git.githubPush());
+					// this will update the response message with each push
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

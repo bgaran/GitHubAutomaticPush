@@ -76,8 +76,17 @@ public class GitHubHelper {
 				String command = " cd " + projectPath + "&& git fetch && git diff @{upstream}"; 
 				//@{upstream} references the remote repository and will get the differences
 				//between students local clone and the professors remote repo
-					
+				String message= excecuteMacCommand(command);
+				if (message == null || message=="")
+				{
+					return "No differences between the local and remote repositories";
+				}
+				else
+				{
 				return excecuteMacCommand(command);
+				}
+				
+				
 		}
 	}
 
@@ -97,7 +106,15 @@ public class GitHubHelper {
 		}
 		else{
 				String command = " cd " + projectPath + " && git reset --hard @{upstream}";
+				String message= excecuteMacCommand(command);
+				if (message.startsWith("HEAD is now at"))
+				{
+					return "Remote copy successfully pulled!";
+				}
+				else
+				{
 				return excecuteMacCommand(command);
+				}
 		}
 	}
 	
@@ -123,7 +140,15 @@ public class GitHubHelper {
 					+ "to the new cloned repository folder";
 		} else {
 			String command = " cd " + destPath + " && git clone " + gitURL;
+			String message= excecuteMacCommand(command);
+			if (message==null || message=="")
+			{
+				return "Repository was successfully cloned to "+projectPath;
+			}
+			else
+			{
 			return excecuteMacCommand(command);
+			}
 		}
 	}
 	
