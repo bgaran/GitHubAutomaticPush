@@ -117,8 +117,10 @@ public class GitHubHelper {
 			
 			return "The cloned project should now be in your specified folder. To use this project, in Eclipse "
 					+ "select File > Open Projects from File System... and navigate to this cloned project using "
-					+ "the Directory button. Note: You may need to change the file path to this new cloned project "
-					+ "in this Git Helper to use the other git commands";
+					+ "the Directory button. If the project doesn't show up in your Project Explorer/Package Explorer, "
+					+ "go to your Git Repositories > right click on the cloned repo > Show In > Project Explorer/Package "
+					+ "Explorer (depending on which you use). Now in R3gurGit8, select Back, select Student, and browse "
+					+ "to the new cloned repository folder";
 		} else {
 			String command = " cd " + destPath + " && git clone " + gitURL;
 			return excecuteMacCommand(command);
